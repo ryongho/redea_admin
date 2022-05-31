@@ -74,7 +74,7 @@ class UserController extends Controller
 
     public function login(Request $request){
 
-        $user = User::where('email' , $request->email)->where('leave','N')->where('user_type','4')->first();
+        $user = User::where('email' , $request->email)->where('leave','N')->first();
 
         $return = new \stdClass;
 

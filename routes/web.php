@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\HotelController;
@@ -36,10 +37,17 @@ Route::get('/login', function () {
 Route::post('/login_proc', [UserController::class, 'login'])->name('login_proc');
 
 Route::middleware('auth:sanctum')->get('/', function () {
-    return view('main');
+    $list = QuestionController::get_list();
+    return view('main', ['list' => $list]);
+
 })->name('main');
 
-Route::middleware('auth:sanctum')->get('/user_list', [UserController::class, 'user_list'])->name('user_list');
+Route::middleware('auth:sanctum')->post('/regist_question', [QuestionController::class, 'regist'])->name('regist_question');
+Route::middleware('auth:sanctum')->get('/view_question', [QuestionController::class, 'view'])->name('view_question');
+Route::middleware('auth:sanctum')->post('/regist_answer', [AnswerController::class, 'regist'])->name('regist_answer');
+
+
+
 Route::middleware('auth:sanctum')->get('/partner_list', [PartnerController::class, 'partner_list'])->name('partner_list');
 Route::middleware('auth:sanctum')->get('/reservation_list', [ReservationController::class, 'reservation_list'])->name('reservation_list');
 Route::middleware('auth:sanctum')->get('/hotel_list', [HotelController::class, 'hotel_list'])->name('hotel_list');

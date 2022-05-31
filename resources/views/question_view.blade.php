@@ -41,7 +41,7 @@
       input{
         margin-top:30px;
       }
-      #question{
+      #answer{
           width:80%;
           margin-left:10%;
       }
@@ -94,25 +94,26 @@
   <body class="text-center">
     <div id="main">
         <div id="div_regist">
-            <form class="form-signin" method="POST" action="{{ route('regist_question') }}">
+            <form class="form-signin" method="POST" action="{{ route('regist_answer') }}">
             @csrf
-                <h1 class="h3 mb-3 font-weight-normal">Q & A</h1>
-                <input type="text" name="question" id="question" class="form-control" placeholder="자유롭게 질문을 등록해 주세요." required autofocus>
+                <h1 class="h3 mb-3 font-weight-normal">{{ $list->question->question }}</h1>
+                <input type="text" name="answer" id="answer" class="form-control" placeholder="자유롭게 답변해 주세요." required autofocus>
+                <input type="hidden" name="question_id" value="{{ $list->question->id }}"/>
                 <button class="btn btn-primary btn-block" id="btn_regist"  type="submit">등록</button>
             </form>  
         </div>
         <div id="div_list">
-        @forelse($list->data as $data)
-            <div class="card" onclick="go_view({{$data['id']}})">
+        @forelse($list->answers as $answer)
+            <div class="card">
                 
                 <div class="card-body">
-                    {{ $data['question'] }}
+                    {{ $answer['answer'] }}
                 </div> 
             </div>
         @empty
             <div class="card">
                 <div class="card-body">
-                    질문이 없습니다.
+                    답변이 없습니다.
                 </div>
             </div>
         @endforelse 
