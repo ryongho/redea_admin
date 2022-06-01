@@ -52,7 +52,7 @@ class QuestionController extends Controller
 
     
 
-    public function get_list(){
+    public static function get_list(){
         $row = 100;
 
         $rows = Question::limit($row)->get();
