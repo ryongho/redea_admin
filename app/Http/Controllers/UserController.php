@@ -4,48 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Answer;
+use App\Models\Question;
 use App\Models\User;
-use App\Models\Hotel;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
-use PHPExcel; 
-use PHPExcel_IOFactory;
 
 class UserController extends Controller
 {
     public function regist(Request $request)
     {
-        //dd($request);
-        $return = new \stdClass;
+        return view('regist_user');
+    }
 
-        $return->status = "500";
-        $return->msg = "관리자에게 문의";
-        $return->data = $request->user_id;
-
+    public function regist_proc(Request $request)
+    {
+        dd($request);
         /* 중복 체크 - start*/
         $email_cnt = User::where('email',$request->email)->count();
-        $phone_cnt = User::where('phone',$request->phone)->count();
+        $id_cnt = User::where('user_id',$request->id)->count();
 
-        /*if($email_cnt){
+        if($email_cnt){
             $return->status = "602";
             $return->msg = "사용중인 이메일";
-            $return->data = $request->email;
-        }else if ($phone_cnt){
-            $return->status = "603";
-            $return->msg = "사용중인 폰 번호";
-            $return->data = $request->phone;
-        //중복 체크 - end
-        }else{*/
+            $return->email = $request->email;
+            return view('user_resegist', ['return' =>$return]);
+        }elseif($id_cnt){
+            $return->status = "601";
+            $return->msg = "사용중인 아이디";
+            $return->user_id = $request->id;
+            return view('user_resegist', ['return' =>$return]);
+        }else{
             $result = User::insertGetId([
-                'name'=> $request->name ,
-                'nickname'=> $request->nickname ,
                 'email' => $request->email, 
                 'password' => $request->password, 
                 'user_id' => $request->user_id,
-                'phone' => $request->phone, 
-                'user_type' => $request->user_type,
-                'push' => $request->push,
-                'push_event' => $request->push_event,
                 'created_at' => Carbon::now(),
                 'password' => Hash::make($request->password)
             ]);
@@ -54,22 +47,21 @@ class UserController extends Controller
 
                 Auth::loginUsingId($result);
                 $login_user = Auth::user();
-
-                $token = $login_user->createToken('user');
-
                 $return->status = "200";
                 $return->msg = "success";
                 $return->data = $request->name;
                 $return->token = $token->plainTextToken;
+
+                return view('main', ['return' =>$return]);
+            }else{
+                $return->status = "500";
+                $return->msg = "회원 등록 실패";
+                return view('user_resegist', ['return' =>$return]);
             }
-        //}
+        }
         
 
-        return response()->json($return, 200)->withHeaders([
-            'Content-Type' => 'application/json'
-        ]);;
-
-        //return view('user.profile', ['user' => User::findOrFail($id)]);
+        
     }
 
     public function login(Request $request){
@@ -96,16 +88,38 @@ class UserController extends Controller
             $return->token = $token->plainTextToken;
             
             //dd($token->plainTextToken);
-            return redirect()->route('user_list');    
+            return redirect()->route('main');    
         }else{
             $return->status = "500";
             $return->msg = "아이디 또는 패스워드가 일치하지 않습니다.";
             $return->email = $request->email;
             return redirect()->route('login');
         }
+    }
 
+    public function page(Request $request){
+        $user = User::where('user_id' , $request->user_id)->where('leave','N')->first();
+
+        //$question = Question::where('id',$question_id)->first();
+        $answers = Answer::where('user_id',$user->id)->get();
+        $ques = array();
+        $i = 0;
+
+        foreach($answers as $answer){
+            $question = Question::where('id',$answer->question_id)->first();
+            $answers[$i]['question'] = $question['question'];
+            $i++;
+        }
+
+        $list = new \stdClass;
+
+        $list->status = "200";
+        $list->msg = "success";
         
-    
+        $list->data = $answers;
+
+        return view('page', ['list' => $list]);
+
     }
 
    
