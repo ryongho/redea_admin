@@ -37,7 +37,7 @@ Route::get('/login', function () {
 
 Route::post('/login_proc', [UserController::class, 'login'])->name('login_proc');
 
-Route::middleware('auth:sanctum')->get('/', function () {
+Route::get('/', function () {
     $list = QuestionController::get_list();
     return view('main', ['list' => $list]);
 })->name('main');
