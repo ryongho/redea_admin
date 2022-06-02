@@ -66,6 +66,8 @@ class UserController extends Controller
 
     public function login(Request $request){
 
+        dd($request);
+
         $user = User::where('email' , $request->email)->where('leave','N')->first();
 
         $return = new \stdClass;
