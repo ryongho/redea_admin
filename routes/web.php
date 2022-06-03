@@ -48,7 +48,7 @@ Route::get('/list', function () {
 })->name('list');
 
 Route::middleware('auth:sanctum')->post('/regist_question', [QuestionController::class, 'regist'])->name('regist_question');
-Route::middleware('auth:sanctum')->get('/view_question', [QuestionController::class, 'view'])->name('view_question');
+Route::get('/view_question', [QuestionController::class, 'view'])->name('view_question');
 Route::middleware('auth:sanctum')->post('/regist_answer', [AnswerController::class, 'regist'])->name('regist_answer');
 Route::middleware('auth:sanctum')->get('/page/{user_id}', [UserController::class, 'page'])->name('page');
 Route::get('/user/regist', [UserController::class, 'regist'])->name('user_resegist');

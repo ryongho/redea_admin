@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>QnA</title>
+    <title>Queroll</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 
@@ -92,6 +92,10 @@
     function go_list(){
         location.href="/list";
     }
+
+    function go_page(user_id){
+      location.href="/page/"+user_id;
+    }
     
 
   </script>
@@ -115,7 +119,8 @@
                 <div class="card-body">
                     {{ $answer['answer'] }}
                     <div style="width:100%;text-align:right;">
-                        <span style="color:gray;font-size:9pt; "> 작성시간 : {{ $answer['created_at'] }} <br/> 작성자 : {{ $answer['user_id'] }}<span>
+                      
+                      <span style="color:gray;font-size:9pt; "> 작성자 : <span style="font-weibht:400;color:black;font-size:9pt; "><a onclick="go_page('{{ $answer['user_id'] }}')">  {{ $answer['user_id'] }}</a></span>  <br/> 작성시간 : {{ $answer['created_at'] }} <span>
                     </div>
                 </div> 
             </div>
