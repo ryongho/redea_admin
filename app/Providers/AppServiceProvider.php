@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        dd(env('FORCE_HTTPS'));
         if(env('FORCE_HTTPS',true)) { // Default value should be false for local server
             \URL::forceScheme('https');
         }
