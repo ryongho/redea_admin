@@ -42,6 +42,11 @@ Route::get('/', function () {
     return view('main', ['list' => $list]);
 })->name('main');
 
+Route::get('/list', function () {
+    $list = QuestionController::get_list();
+    return view('main', ['list' => $list]);
+})->name('list');
+
 Route::middleware('auth:sanctum')->post('/regist_question', [QuestionController::class, 'regist'])->name('regist_question');
 Route::middleware('auth:sanctum')->get('/view_question', [QuestionController::class, 'view'])->name('view_question');
 Route::middleware('auth:sanctum')->post('/regist_answer', [AnswerController::class, 'regist'])->name('regist_answer');

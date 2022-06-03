@@ -19,26 +19,29 @@ class UserController extends Controller
 
     public function regist_proc(Request $request)
     {
-        dd($request);
+        
         /* 중복 체크 - start*/
         $email_cnt = User::where('email',$request->email)->count();
-        $id_cnt = User::where('user_id',$request->id)->count();
+        $id_cnt = User::where('user_id',$request->user_id)->count();
+
+        $return = new \stdClass;
 
         if($email_cnt){
             $return->status = "602";
             $return->msg = "사용중인 이메일";
             $return->email = $request->email;
-            return view('user_resegist', ['return' =>$return]);
+            return redirect()->back()->with('alert',$return->msg);
         }elseif($id_cnt){
             $return->status = "601";
             $return->msg = "사용중인 아이디";
             $return->user_id = $request->id;
-            return view('user_resegist', ['return' =>$return]);
+            return redirect()->back()->with('alert',$return->msg);
         }else{
             $result = User::insertGetId([
                 'email' => $request->email, 
                 'password' => $request->password, 
                 'user_id' => $request->user_id,
+                'name' => $request->name,
                 'created_at' => Carbon::now(),
                 'password' => Hash::make($request->password)
             ]);
@@ -50,13 +53,12 @@ class UserController extends Controller
                 $return->status = "200";
                 $return->msg = "success";
                 $return->data = $request->name;
-                $return->token = $token->plainTextToken;
 
-                return view('main', ['return' =>$return]);
+                return redirect()->route('main');
             }else{
                 $return->status = "500";
                 $return->msg = "회원 등록 실패";
-                return view('user_resegist', ['return' =>$return]);
+                return redirect()->back()->with('alert',$return->msg);
             }
         }
         
@@ -66,8 +68,6 @@ class UserController extends Controller
 
     public function login(Request $request){
 
-        dd($request);
-
         $user = User::where('email' , $request->email)->where('leave','N')->first();
 
         $return = new \stdClass;
@@ -75,8 +75,8 @@ class UserController extends Controller
         if(!$user){
             $return->status = "501";
             $return->msg = "존재하지 않는 아이디 입니다.";
-            $return->email = $request->email;
-            return redirect()->route('login');
+            
+            return redirect()->back()->with('alert',$return->msg);
         }else if (Hash::check($request->password, $user->password)) {
             //echo("로그인 확인");
             Auth::loginUsingId($user->id);
@@ -88,14 +88,14 @@ class UserController extends Controller
             $return->msg = "성공";
             $return->dormant = $login_user->dormant;
             $return->token = $token->plainTextToken;
-            
+
             //dd($token->plainTextToken);
-            return redirect()->route('main');    
+            return redirect()->route('main');   
         }else{
             $return->status = "500";
             $return->msg = "아이디 또는 패스워드가 일치하지 않습니다.";
-            $return->email = $request->email;
-            return redirect()->route('login');
+            
+            return redirect()->back()->with('alert',$return->msg);
         }
     }
 
@@ -119,6 +119,7 @@ class UserController extends Controller
         $list->msg = "success";
         
         $list->data = $answers;
+        $list->user = $user;
 
         return view('page', ['list' => $list]);
 

@@ -31,19 +31,34 @@
     </style>
   </head>
   
+  
   <script src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
   <script src="js/jquery.cookie.js"></script>
+  <script type="text/javascript">
+    const msg = '{{Session::get('alert')}}';
+    const exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+
+    const go_signup = function(){
+      window.location.href="/user/regist";
+    }
+
+    
+  </script>
 
   <body class="text-center">
     <div id="main">
       <form class="form-signin" method="POST" action="{{ route('login_proc') }}">
         @csrf
         <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
-        <input type="ID" name="email" id="inputId" class="form-control" placeholder="ID" required autofocus>
+        <input type="email" name="email" id="inputId" class="form-control" placeholder="Email" required autofocus>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit">Login</button>  
+        <button class="btn btn-lg btn-dark btn-block" id="sign_btn" onclick="go_signup()" type="button">Sign UP</button>
       </form>  
     </div>
     

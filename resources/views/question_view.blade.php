@@ -38,6 +38,10 @@
       #btn_regist{
         margin-top:30px;
       }
+      #btn_go_list{
+        margin-top:20px;
+
+      }
       input{
         margin-top:30px;
       }
@@ -85,9 +89,10 @@
       });
     });*/
 
-    function go_view(id){
-        location.href="/view_question?question_id="+id;
+    function go_list(){
+        location.href="/list";
     }
+    
 
   </script>
 
@@ -97,9 +102,10 @@
             <form class="form-signin" method="POST" action="{{ route('regist_answer') }}">
             @csrf
                 <h1 class="h3 mb-3 font-weight-normal">{{ $list->question->question }}</h1>
-                <input type="text" name="answer" id="answer" class="form-control" placeholder="자유롭게 답변해 주세요." required autofocus>
+                <textarea name="answer" id="answer" class="form-control" placeholder="자유롭게 답변해 주세요." required autofocus></textarea>
                 <input type="hidden" name="question_id" value="{{ $list->question->id }}"/>
                 <button class="btn btn-primary btn-block" id="btn_regist"  type="submit">등록</button>
+                
             </form>  
         </div>
         <div id="div_list">
@@ -108,6 +114,9 @@
                 
                 <div class="card-body">
                     {{ $answer['answer'] }}
+                    <div style="width:100%;text-align:right;">
+                        <span style="color:gray;font-size:9pt; "> 작성시간 : {{ $answer['created_at'] }} <br/> 작성자 : {{ $answer['user_id'] }}<span>
+                    </div>
                 </div> 
             </div>
         @empty
@@ -118,6 +127,8 @@
             </div>
         @endforelse 
         <div>
+
+        <button class="btn btn-gray btn-dark" id="btn_go_list" onclick="go_list()" type="button">목록으로</button>
     </div>
     
   </body>

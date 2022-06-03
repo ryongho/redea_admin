@@ -96,8 +96,8 @@
         <div id="div_regist">
             <form class="form-signin" method="POST" action="{{ route('regist_question') }}">
             @csrf
-                <h1 class="h3 mb-3 font-weight-normal">Q & A</h1>
-                <input type="text" name="question" id="question" class="form-control" placeholder="자유롭게 질문을 등록해 주세요." required autofocus>
+                <h1 class="h3 mb-3 font-weight-normal">Queroll</h1>
+                <textarea name="question" id="question" class="form-control" placeholder="자유롭게 질문을 등록해 주세요." required autofocus></textarea>
                 <button class="btn btn-primary btn-block" id="btn_regist"  type="submit">등록</button>
             </form>  
         </div>
@@ -107,6 +107,9 @@
                 
                 <div class="card-body">
                     {{ $data['question'] }}
+                    <div style="width:100%;text-align:right;">
+                        <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> 질문자 : {{ $data['user_id'] }}<span>
+                    </div>
                 </div> 
             </div>
         @empty

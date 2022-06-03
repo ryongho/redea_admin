@@ -93,16 +93,16 @@
 
   <body class="text-center">
     <div id="main">
-        
+      <h1 class="h3 mb-3 font-weight-normal">{{ $list->user['user_id'] }}</h1>
         <div id="div_list">
         @forelse($list->data as $data)
-            <div class="card" onclick="go_view({{$data['id']}})">
+            <div class="card" onclick="go_view({{$data['question_id']}})">
                 
                 <div class="card-body">
-                    {{ $data['question'] }}
+                    <span style="font-weight:600;">{{ $data['question'] }}</span>
                 </div> 
                 <div class="card-body">
-                    {{ $data['answer'] }}
+                <span style="font-weight:400">{{ $data['answer'] }}</span>
                 </div> 
             </div>
         @empty

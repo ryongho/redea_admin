@@ -35,8 +35,19 @@ class AnswerController extends Controller
     {
         $question_id = $request->question_id;
 
-        $question = Question::where('id',$question_id)->first();
-        $answers = Answer::where('question_id',$question_id)->get();
+        $question = Question::select(   
+            '*',
+            DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+            DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
+            )
+            ->where('id',$question_id)->first();
+
+        $answers = Answer::select(   
+            '*',
+            DB::raw('(select user_id from users where answers.user_id = users.id) as user_name'),
+            )
+            ->where('question_id',$question_id)->get();
+        
 
         $list = new \stdClass;
 

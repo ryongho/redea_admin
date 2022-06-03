@@ -35,8 +35,18 @@ class QuestionController extends Controller
     {
         $question_id = $request->question_id;
 
-        $question = Question::where('id',$question_id)->first();
-        $answers = Answer::where('question_id',$question_id)->get();
+        $question = Question::select(   
+            '*',
+            DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+            DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
+            )
+            ->where('id',$question_id)->first();
+
+        $answers = Answer::select(   
+            '*',
+            DB::raw('(select user_id from users where answers.user_id = users.id) as user_id'),
+            )
+            ->where('question_id',$question_id)->get();
 
         $list = new \stdClass;
 
@@ -55,7 +65,12 @@ class QuestionController extends Controller
     public static function get_list(){
         $row = 100;
 
-        $rows = Question::limit($row)->get();
+        $rows = Question::select(   
+                '*',
+                DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+                DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
+                )
+                ->limit($row)->orderby('id','desc')->get();
 
         $count = Question::count();
 
