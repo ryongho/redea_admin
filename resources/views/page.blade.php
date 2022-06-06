@@ -86,7 +86,7 @@
     });*/
 
     function go_view(id){
-        location.href="/view_question?question_id="+id;
+        location.href="/view_que/"+id;
     }
 
   </script>

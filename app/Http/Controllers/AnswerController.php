@@ -27,7 +27,7 @@ class AnswerController extends Controller
         ]);
         $return->status = "200";
         
-        return redirect()->route('view_question', ['question_id' => $question_id]); 
+        return redirect()->route('view_que', ['question_id' => $question_id]); 
 
     }
 

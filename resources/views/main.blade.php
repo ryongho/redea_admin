@@ -44,6 +44,7 @@
       #question{
           width:80%;
           margin-left:10%;
+          height:100px;
       }
       .card{
           margin-bottom:20px;
@@ -86,7 +87,7 @@
     });*/
 
     function go_view(id){
-        location.href="/view_question?question_id="+id;
+        location.href="/view_que/"+id;
     }
 
   </script>
@@ -94,10 +95,10 @@
   <body class="text-center">
     <div id="main">
         <div id="div_regist">
-            <form class="form-signin" method="POST" action="{{ route('regist_question') }}">
+            <form class="form-signin" method="POST" action="{{ route('regist_que') }}">
             @csrf
                 <h1 class="h3 mb-3 font-weight-normal">Queroll</h1>
-                <textarea name="question" id="question" class="form-control" placeholder="자유롭게 질문을 등록해 주세요." required autofocus></textarea>
+                <textarea name="question" id="question" class="form-control" placeholder="자유롭게 질문을 등록해 주세요.&#13;&#10;태그(#)를 추가하여 질문을 분류 할 수 있습니다.&#13;&#10;ex)가장 좋아하는 음식은? #음식 #취향 #맛집소개" required autofocus></textarea>
                 <button class="btn btn-primary btn-block" id="btn_regist"  type="submit">등록</button>
             </form>  
         </div>

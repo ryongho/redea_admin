@@ -9,11 +9,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\HotelController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\GoodsController;
+use App\Http\Controllers\LikeController;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -47,10 +43,11 @@ Route::get('/list', function () {
     return view('main', ['list' => $list]);
 })->name('list');
 
-Route::middleware('auth:sanctum')->post('/regist_question', [QuestionController::class, 'regist'])->name('regist_question');
-Route::get('/view_question', [QuestionController::class, 'view'])->name('view_question');
+Route::middleware('auth:sanctum')->post('/regist_que', [QuestionController::class, 'regist'])->name('regist_que');
+Route::get('/view_que/{question_id}', [QuestionController::class, 'view'])->name('view_que');
 Route::middleware('auth:sanctum')->post('/regist_answer', [AnswerController::class, 'regist'])->name('regist_answer');
 Route::middleware('auth:sanctum')->get('/page/{user_id}', [UserController::class, 'page'])->name('page');
 Route::get('/user/regist', [UserController::class, 'regist'])->name('user_resegist');
 Route::post('/user/regist_proc', [UserController::class, 'regist_proc'])->name('user_regist_proc');
+Route::middleware('auth:sanctum')->post('/like', [LikeController::class, 'toggle'])->name('like');
 

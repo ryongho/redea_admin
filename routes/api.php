@@ -8,7 +8,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\GoodsController;
-use App\Http\Controllers\WishController;
+
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ViewlogController;
 use App\Http\Controllers\ImageController;
@@ -106,12 +106,6 @@ Route::middleware('auth:sanctum')->delete('/goods/delete', [GoodsController::cla
 Route::middleware('auth:sanctum')->put('/review/regist', [ReviewController::class, 'regist']);
 Route::get('/review/detail', [ReviewController::class, 'detail']);
 Route::get('/review/list', [ReviewController::class, 'list']);
-
-Route::middleware('auth:sanctum')->put('/wish/toggle', [WishController::class, 'toggle']);
-Route::middleware('auth:sanctum')->get('/wish/list', [WishController::class, 'list']);
-Route::middleware('auth:sanctum')->put('/wish/compare', [WishController::class, 'compare']);
-Route::middleware('auth:sanctum')->put('/wish/regist', [WishController::class, 'regist']);
-
 
 Route::middleware('auth:sanctum')->put('/push/regist', [PushController::class, 'regist']);
 Route::middleware('auth:sanctum')->get('/push/list', [PushController::class, 'list']);
