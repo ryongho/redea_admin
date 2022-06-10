@@ -125,6 +125,34 @@ class UserController extends Controller
 
     }
 
+    public function mypage(Request $request){
+        $user_info = Auth::user();
+        $user = User::where('id', $user_info->id)->first();
+
+        $answers = Answer::where('user_id',$user->id)->get();
+        $ques = array();
+        $i = 0;
+
+        foreach($answers as $answer){
+            $question = Question::where('id',$answer->question_id)->first();
+            $answers[$i]['question'] = $question['question'];
+            $i++;
+        }
+
+        $list = new \stdClass;
+
+        $list->status = "200";
+        $list->msg = "success";
+        
+        $list->data = $answers;
+        $list->user = $user;
+
+        return view('page', ['list' => $list]);
+
+    }
+
+    
+
    
 
     public function logout(Request $request){
