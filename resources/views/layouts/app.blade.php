@@ -100,6 +100,11 @@
         margin:auto;
         margin-top:50px;
       }
+      pre{
+        overflow: auto;
+        white-space: pre-wrap; /* pre tag내에 word wrap */
+      }
+
       
     </style>
   </head>

@@ -16,7 +16,7 @@
             <div class="card" onclick="go_view({{$data['id']}})">
                 
                 <div class="card-body">
-                    {{ $data['question'] }}
+                    <pre>{{ $data['question'] }}</pre>
                     <div style="width:100%;text-align:right;">
                         <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> 질문자 : {{ $data['user_id'] }}<span>
                     </div>

@@ -15,10 +15,10 @@
             <div class="card" onclick="go_view({{$data['question_id']}})">
                 
                 <div class="card-body">
-                    <span style="font-weight:600;">{{ $data['question'] }}</span>
+                    <span style="font-weight:600;"><pre>{{ $data['question'] }}</pre></span>
                 </div> 
                 <div class="card-body">
-                <span style="font-weight:400">{{ $data['answer'] }}</span>
+                <span style="font-weight:400"><pre>{{ $data['answer'] }}</pre></span>
                 </div> 
             </div>
         @empty

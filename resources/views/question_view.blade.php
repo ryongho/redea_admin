@@ -65,7 +65,7 @@ function like(answer_id){
                 
                 <div class="card-body">
                     <div style="width:100%;">    
-                      {{ $answer['answer'] }}
+                      <pre>{{ $answer['answer'] }}</pre>
                     </div>
                     <div style="width:30%;float:left">
                         @if($answer->is_like)
@@ -89,6 +89,7 @@ function like(answer_id){
                     </div>
                     
                     <div style="width:70%;text-align:right;float:right;">
+                      <span style="color:gray;font-size:11pt;" onclick="go_page('{{$answer['user_id']}}')"> {{ $answer['user_id'] }} <span><br/>
                       <span style="color:gray;font-size:9pt; ">  작성시간 : {{ $answer['created_at'] }} <span>
                     </div>
                 </div> 
