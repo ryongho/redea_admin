@@ -7,7 +7,9 @@
 @endsection
 
     <div id="main">
-      <h1 class="h3 mb-3 font-weight-normal" style="margin-left:10%;margin-top:100px;">{{ $list->user['user_id'] }}</h1>
+        <div class="top">
+          <h1 class="h3 mb-3 font-weight-normal" style="margin-top:100px;">{{ $list->user['user_id'] }}</h1>
+        </div>
         <div id="div_list">
         @forelse($list->data as $data)
             <div class="card" onclick="go_view({{$data['question_id']}})">

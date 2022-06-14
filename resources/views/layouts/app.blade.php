@@ -28,12 +28,14 @@
       }
       .navbar-brand{
           text-align:left;
-          width:80%;
+          width:50%;
           font-weight:bold; 
           color:#77bdf7;
+          float:left;
       }
       .nav_btn{
           cursor:pointer;
+          float:right;
       }
       .dropdown-menu{
           text-align:right;
@@ -87,6 +89,16 @@
       }
       .h3{
           font-size:18px;
+          width:80%;
+          margin-left:10%;
+          text-align:left;
+       
+      }
+      .top{
+        width:100%;
+        max-width:800px;
+        margin:auto;
+        margin-top:50px;
       }
       
     </style>
@@ -152,8 +164,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/mypage">마이페이지</a>
-                        <a class="dropdown-item" href="#">내 질문 보러가기</a>
-                        <a class="dropdown-item" href="#">내 답변 보러가기</a>
+                        <a class="dropdown-item" href="#">공유하기</a>
                     </div>
                 </div>
             @else
