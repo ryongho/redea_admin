@@ -11,7 +11,7 @@
         <div id="div_regist">
             <form class="form-signin" method="POST" action="{{ route('regist_que') }}">
             @csrf
-                <h1 class="h3 mb-3 font-weight-normal" style="margin-left:10%;">오늘은 어떤 질문을 생각했나요?</h1>
+                <h1 class="h3 mb-3 font-weight-normal" style="margin-left:10%;">오늘의 질문을 등록해주세요.</h1>
                 <textarea name="question" id="question" class="form-control" placeholder="자유롭게 질문을 입력해 주세요.&#13;&#10;태그(#)를 추가하여 질문을 분류 할 수 있습니다.&#13;&#10;ex)가장 좋아하는 음식은? #음식 #취향 #맛집소개" required autofocus></textarea>
                 <button class="btn btn-primary btn-block" id="btn_regist" style="margin-left:80%;" type="submit">입력</button>
             </form>  

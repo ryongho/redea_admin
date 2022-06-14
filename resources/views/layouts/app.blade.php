@@ -43,6 +43,7 @@
         width:100%;
         min-width:400px;
         margin:auto;
+        margin-top:60px;
       }
 
       #div_regist{
@@ -71,6 +72,12 @@
           margin-left:10%;
           height:100px;
       }
+      #answer{
+          width:80%;
+          margin-left:10%;
+          height:100px;
+      }
+      
       .card{
           margin-bottom:20px;
           width:80%;
@@ -121,6 +128,14 @@
 
     function go_login(){
         location.href="/login";
+    }
+
+    function go_list(){
+        location.href="/list";
+    }
+
+    function go_page(user_id){
+      location.href="/page/"+user_id;
     }
 
   </script>

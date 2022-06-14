@@ -46,7 +46,7 @@ Route::get('/list', function () {
 Route::middleware('auth:sanctum')->post('/regist_que', [QuestionController::class, 'regist'])->name('regist_que');
 Route::get('/view_que/{question_id}', [QuestionController::class, 'view'])->name('view_que');
 Route::middleware('auth:sanctum')->post('/regist_answer', [AnswerController::class, 'regist'])->name('regist_answer');
-Route::middleware('auth:sanctum')->get('/page/{user_id}', [UserController::class, 'page'])->name('page');
+Route::get('/page/{user_id}', [UserController::class, 'page'])->name('page');
 Route::middleware('auth:sanctum')->get('/mypage', [UserController::class, 'mypage'])->name('mypage');
 Route::get('/user/regist', [UserController::class, 'regist'])->name('user_resegist');
 Route::post('/user/regist_proc', [UserController::class, 'regist_proc'])->name('user_regist_proc');
