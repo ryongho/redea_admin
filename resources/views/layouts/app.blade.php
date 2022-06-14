@@ -74,6 +74,11 @@
           margin-left:10%;
           height:100px;
       }
+      #tag{
+        width:80%;
+        margin-left:10%;
+        margin-top:15px;
+      }
       #answer{
           width:80%;
           margin-left:10%;

@@ -20,19 +20,28 @@ class QuestionController extends Controller
 
         $return = new \stdClass;
 
-        $result = Question::insert([
+        $result = Question::insertGetId([
             'user_id'=> $user_id ,
             'question'=> $question ,
             'created_at'=> Carbon::now(),
         ]);
 
         if($result){
-            $tags = $this->get_tags($question);
-            
+
+            $tags = explode("#", $request->tag);
+            $i = 0;
             foreach($tags as $tag){
-                $tag_table = Tag::firstOrNew(['tag' => $tag]); // your data
+                if($i > 0){
+                    $result2 = Tag::insert([
+                        'q_id'=> $result ,
+                        'tag'=> $tag ,
+                        'created_at'=> Carbon::now(),
+                    ]);
+                }
+                $i++;
+                //$tag_table = Tag::firstOrNew(['tag' => $tag]); // your data
                 // make your affectation to the $table1
-                $tag_table->save();
+                //$tag_table->save();
                 //$result2 = Tag::updateOrInsert('tag', $tag); 
             }
             
@@ -95,6 +104,7 @@ class QuestionController extends Controller
                 '*',
                 DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
                 DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
+                DB::raw('(select group_concat(tag ,"") from tags where tags.q_id = questions.id) as tag_str'),
                 )
                 ->limit($row)->orderby('id','desc')->get();
 
