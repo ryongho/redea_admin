@@ -7,8 +7,10 @@
 @endsection
 
     <div id="main">
-        <div class="top">
-          <h1 class="h3 mb-3 font-weight-normal" style="margin-top:100px;">{{ $list->user['user_id'] }}</h1>
+        <div class="top" style="margin-top:100px;margin-bottom:100px;">
+          <h1 class="h3 mb-3 font-weight-bold" style="width:150px;float:left">{{ $list->user['user_id'] }}</h1>
+          <span style="float:left;font-size:9pt;margin-top:5px;">질문&nbsp;:&nbsp;{{$list->my_que_cnt}}&nbsp;/&nbsp; </span>
+          <span style="float:left;font-size:9pt;margin-top:5px;">답변&nbsp;:&nbsp;{{$list->my_ans_cnt}} </span>
         </div>
         <div id="div_list">
         @forelse($list->data as $data)

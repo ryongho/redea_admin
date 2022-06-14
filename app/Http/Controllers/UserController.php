@@ -113,14 +113,18 @@ class UserController extends Controller
             $i++;
         }
 
+
         $list = new \stdClass;
+
+        $list->my_que_cnt = Question::where('user_id',$user->id)->count();
+        $list->my_ans_cnt = Answer::where('user_id',$user->id)->count();
 
         $list->status = "200";
         $list->msg = "success";
         
         $list->data = $answers;
         $list->user = $user;
-
+    
         return view('page', ['list' => $list]);
 
     }
@@ -141,6 +145,9 @@ class UserController extends Controller
 
         $list = new \stdClass;
 
+        $list->my_que_cnt = Question::where('user_id',$user->id)->count();
+        $list->my_ans_cnt = Answer::where('user_id',$user->id)->count();
+
         $list->status = "200";
         $list->msg = "success";
         
@@ -154,7 +161,7 @@ class UserController extends Controller
     public function logout(Request $request){
 
         Auth::guard('web')->logout();
-        
+
         Auth::user()->tokens()->delete();
     
         return redirect()->route('main');
