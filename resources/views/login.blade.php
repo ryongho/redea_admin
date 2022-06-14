@@ -20,7 +20,7 @@
         width:300px;
         height:300px;
         margin:auto;
-        margin-top:300px;
+        margin-top:100px;
       }
       .btn-lg{
         margin-top:30px;
