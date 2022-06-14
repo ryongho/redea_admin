@@ -143,7 +143,7 @@ class QuestionController extends Controller
         $tag_arr = explode("#",$string);
         $tags = array();
         $i = 0;
-        $y= 1;
+        $y= 0;
         foreach($tag_arr as $tag){
             if($y > 0){
                 $keys = explode(" ",$tag);
