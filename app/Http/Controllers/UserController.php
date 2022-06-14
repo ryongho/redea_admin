@@ -151,22 +151,13 @@ class UserController extends Controller
 
     }
 
-    
-
-   
-
     public function logout(Request $request){
-        $user_info = Auth::user();
-        $user = User::where('id', $user_info->id)->first();
-        $user->tokens()->delete();
 
-        $return = new \stdClass;
-        $return->status = "200";
-        $return->msg = "success";
-
-        return response()->json($return, 200)->withHeaders([
-            'Content-Type' => 'application/json'
-        ]);;
+        Auth::guard('web')->logout();
+        
+        Auth::user()->tokens()->delete();
+    
+        return redirect()->route('main');
     }
 
     public function login_check(Request $request){

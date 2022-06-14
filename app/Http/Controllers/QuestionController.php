@@ -87,7 +87,6 @@ class QuestionController extends Controller
 
     }
 
-    
 
     public static function get_list(){
         $row = 100;
@@ -111,6 +110,33 @@ class QuestionController extends Controller
         return $list;
         
     }
+
+    public static function myque(){
+
+        $user_id = Auth::id();
+
+        $row = 100;
+
+        $rows = Question::select(   
+                '*',
+                DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+                DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
+                )
+                ->where('questions.user_id',$user_id)
+                ->limit($row)->orderby('id','desc')->get();
+
+        $count = Question::count();
+
+        $list = new \stdClass;
+
+        $list->status = "200";
+        $list->msg = "success";
+        
+        $list->data = $rows;
+        
+        return view('myque', ['list' => $list]);
+        
+    }    
 
     public function get_tags($string){ //문자열을 받아서 태그를 추출하는 기능
         

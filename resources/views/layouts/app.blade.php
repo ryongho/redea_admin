@@ -164,6 +164,8 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/mypage">마이페이지</a>
+                        <a class="dropdown-item" href="/myque">내가 남긴 질문</a>
+                        <a class="dropdown-item" href="/logout">로그아웃</a>
                         <a class="dropdown-item" href="#">공유하기</a>
                     </div>
                 </div>
