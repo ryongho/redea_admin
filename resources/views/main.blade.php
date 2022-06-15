@@ -30,7 +30,7 @@
                              @endif   
                             @endforeach
                         </div>
-                        <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> 질문자 : {{ $data['name'] }}</span>
+                        <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> {{ $data['name'] }}({{ $data['user_id'] }})</span>
                     </div>
                 </div> 
             </div>

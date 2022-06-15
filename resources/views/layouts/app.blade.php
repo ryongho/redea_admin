@@ -113,7 +113,7 @@
       }
       .div_tags{
         text-align:left;
-        color:gray;
+        color:#77bdf7;
         font-size:10pt;
       }
       

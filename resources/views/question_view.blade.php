@@ -1,11 +1,148 @@
+<!doctype html>
+<html lang="kr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-@extends('layouts.app')
+    <title>Queroll</title>
 
-@section('title', '질문 상세 페이지')
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 
-@section('nav')
-    @parent
-@endsection
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <style type="text/css">
+      .navbar{
+        width:100%;
+        max-width:800px;
+        margin:auto;
+        padding:10px 10%;
+        background: #FFF;
+        height:60px;
+        border-bottom:3px solid #77bdf7;
+      }
+      .navbar-brand{
+          text-align:left;
+          width:20%;
+          font-weight:bold; 
+          color:#77bdf7;
+          float:left;
+          font-size:25px;
+      }
+      
+      #main{
+        width:100%;
+        min-width:400px;
+        margin:auto;
+        margin-top:50px;
+      }
+
+      #div_regist{
+        width:100%;
+        max-width:800px;
+        margin:auto;
+        margin-top:50px;
+      }
+
+      #div_list{
+        width:100%;
+        max-width:800px;
+        margin:auto;
+        margin-top:50px;
+      }
+      #btn_regist{
+        margin-top:30px;
+        background: #77bdf7;
+        border-color:#77bdf7;
+      }
+      input{
+        margin-top:30px;
+      }
+      .pointer{
+          cursor:pointer;
+      }
+      #question{
+          width:80%;
+          margin-left:10%;
+          height:100px;
+      }
+      #tag{
+        width:80%;
+        margin-left:10%;
+        margin-top:15px;
+      }
+      #answer{
+          width:80%;
+          margin-left:10%;
+          height:100px;
+      }
+      
+      .card{
+          margin-bottom:20px;
+          width:80%;
+          margin-left:10%;
+          text-align:left;
+      }
+      .h3{
+          font-size:18px;
+          width:80%;
+          margin-left:10%;
+          text-align:left;
+       
+      }
+      .top{
+        width:100%;
+        max-width:800px;
+        margin:auto;
+        margin-top:50px;
+      }
+      pre{
+        overflow: auto;
+        white-space: pre-wrap; /* pre tag내에 word wrap */
+      }
+      .div_tags{
+        text-align:left;
+        color:#77bdf7;
+        font-size:10pt;
+      }
+      
+
+      
+    </style>
+  </head>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+  <script>
+    
+    function go_view(id){
+        location.href="/view_que/"+id;
+    }
+
+    function go_login(){
+        location.href="/login";
+    }
+
+    function go_list(){
+        location.href="/list";
+    }
+
+    function go_search(tag){
+        location.href="/search/"+tag;
+    }
+
+    function go_back(){
+      window.history.back();
+    }
+
+  </script>
+
 <script>
 
 function like(answer_id){
@@ -48,7 +185,12 @@ function like(answer_id){
   }
 
 </script>
+<html>
+  <body>
     <div id="main">
+        <nav class="navbar fixed-top">
+            <a class="navbar-brand" onclick="go_back()"><</a>
+        </nav>
         <div id="div_regist">
             <form class="form-signin" method="POST" action="{{ route('regist_answer') }}">
             @csrf
@@ -107,3 +249,5 @@ function like(answer_id){
 
         
     </div>
+</body>
+</html>

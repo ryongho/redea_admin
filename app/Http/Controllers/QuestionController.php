@@ -30,8 +30,10 @@ class QuestionController extends Controller
         if($result){
 
             $tags = explode("#", $request->tag);
+            
             $i = 0;
             foreach($tags as $tag){
+
                 if($i > 0){
                     $result2 = Tag::insert([
                         'q_id'=> $result ,
