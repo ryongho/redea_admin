@@ -10,6 +10,7 @@ use App\Models\Tag;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
@@ -34,7 +35,7 @@ class QuestionController extends Controller
                 if($i > 0){
                     $result2 = Tag::insert([
                         'q_id'=> $result ,
-                        'tag'=> trim($tag) ,
+                        'tag'=> Str::of($tag)->trim() ,
                         'created_at'=> Carbon::now(),
                     ]);
                 }
