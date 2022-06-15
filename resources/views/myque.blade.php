@@ -14,7 +14,7 @@
     </script>
     <div id="main">
         <div class="top">
-          <h1 class="h3 mb-3 font-weight-normal" style="margin-top:100px;">{{ $list->data[0]['user_id'] }}({{ $list->data[0]['name'] }})님이 등록한 질문입니다.</h1>
+          <h1 class="h3 mb-3 font-weight-normal" style="margin-top:100px;">{{ $list->user_id }}({{ $list->user_name }})님이 등록한 질문입니다.</h1>
         </div>
         <div id="div_list">
         @forelse($list->data as $data)

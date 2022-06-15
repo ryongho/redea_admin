@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Like;
+use App\Models\User;
 use App\Models\Tag;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -163,6 +164,8 @@ class QuestionController extends Controller
 
         $row = 100;
 
+        $user_info = User::where('id',$user_id)->first();
+        
         $rows = Question::select(   
                 '*',
                 DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
@@ -178,6 +181,8 @@ class QuestionController extends Controller
 
         $list->status = "200";
         $list->msg = "success";
+        $list->user_name = $user_info->name;
+        $list->user_id = $user_info->user_id;
         
         $list->data = $rows;
         

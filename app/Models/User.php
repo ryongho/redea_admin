@@ -57,6 +57,10 @@ class User extends Authenticatable
         return $this->id;
     }
 
+    public function getNmae(){
+        return $this->name;
+    }
+
     public function getType(){
         return $this->user_type;
     }
