@@ -35,7 +35,7 @@
       
       #main{
         width:100%;
-        min-width:400px;
+        min-width:380px;
         margin:auto;
         margin-top:50px;
       }
@@ -44,7 +44,7 @@
         width:100%;
         max-width:800px;
         margin:auto;
-        margin-top:80px;
+        margin-top:50px;
       }
 
       #div_list{
@@ -190,15 +190,15 @@ function like(answer_id){
     <div id="main">
         <nav class="navbar fixed-top">
             <a class="navbar-brand" onclick="go_back()"><</a>
-            <span style="width:70%;">
-              {{ $list->question->question }}
+            <span style="width:60%;">
+              질문 상세보기
             </span>
         </nav>
         
         <div id="div_regist">
             <form class="form-signin" method="POST" action="{{ route('regist_answer') }}">
             @csrf
-                <!--<h1 class="h3 mb-3 font-weight-normal"  style="margin-left:10%;margin-top:100px;">Q.{{ $list->question->question }}</h1>-->
+                <h1 class="h3 mb-3 font-weight-normal"  style="margin-left:10%;margin-top:100px;">Q.{{ $list->question->question }}</h1>
                 <textarea name="answer" id="answer" class="form-control" placeholder="자유롭게 답변해 주세요." required autofocus></textarea>
                 <input type="hidden" name="question_id" value="{{ $list->question->id }}"/>
                 <button class="btn btn-primary btn-block" id="btn_regist" style="margin-left:80%;" type="submit">등록</button>

@@ -43,7 +43,7 @@
       }
       #main{
         width:100%;
-        min-width:400px;
+        min-width:380px;
         margin:auto;
         margin-top:60px;
       }
