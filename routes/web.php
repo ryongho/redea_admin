@@ -44,6 +44,11 @@ Route::get('/list', function () {
     return view('main', ['list' => $list]);
 })->name('list');
 
+Route::get('/search/{tag}', function (Request $request) {
+    $list = QuestionController::get_list_search($request);
+    return view('main', ['list' => $list]);
+})->name('search');
+
 Route::middleware('auth:sanctum')->post('/regist_que', [QuestionController::class, 'regist'])->name('regist_que');
 Route::get('/view_que/{question_id}', [QuestionController::class, 'view'])->name('view_que');
 Route::middleware('auth:sanctum')->post('/regist_answer', [AnswerController::class, 'regist'])->name('regist_answer');

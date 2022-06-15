@@ -9,16 +9,16 @@
 
     <div id="main">
         <div class="top">
-          <h1 class="h3 mb-3 font-weight-normal" style="margin-top:100px;">{{ $list->data[0]['user_id'] }}님이 등록한 질문입니다.</h1>
+          <h1 class="h3 mb-3 font-weight-normal" style="margin-top:100px;">{{ $list->data[0]['user_id'] }}({{ $list->data[0]['name'] }})님이 등록한 질문입니다.</h1>
         </div>
         <div id="div_list">
         @forelse($list->data as $data)
             <div class="card" onclick="go_view({{$data['id']}})">
                 
                 <div class="card-body">
-                    <pre>{{ $data['question'] }}</pre>
+                    <pre>Q.{{ $data['question'] }}</pre>
                     <div style="width:100%;text-align:right;">
-                        <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> 질문자 : {{ $data['user_id'] }}<span>
+                        <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> 질문자 : {{ $data['name'] }}<span>
                     </div>
                 </div> 
             </div>

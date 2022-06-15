@@ -19,19 +19,18 @@
         </div>
         <div id="div_list">
         @forelse($list->data as $data)
-            <div class="card" onclick="go_view({{$data['id']}})">
-                
+            <div class="card">
                 <div class="card-body">
-                    <pre>{{ $data['question'] }}</pre>
+                    <pre class="pointer" onclick="go_view({{$data['id']}})" >Q.{{ $data['question'] }}</pre>
                     <div style="width:100%;text-align:right;">
-                        <!--<div class="div_tags">
-                            @forelse(explode(",",$data['tag_str']) as $tag)
-                             <span style="color:gray;font-size:9pt;color:blue; "> #{{ $tag }}<span>
-                            @empty
-
-                            @endforelse
-                        </div>-->
-                        <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> 질문자 : {{ $data['user_id'] }}<span>
+                        <div class="div_tags">
+                            @foreach(explode(",",$data['tag_str']) as $tag)
+                             @if($tag != "")
+                             <span class="pointer" onclick="go_search('{{ $tag }}')"> #{{ $tag }}</span>
+                             @endif   
+                            @endforeach
+                        </div>
+                        <span style="color:gray;font-size:9pt; "> 답변 : {{ $data['ans_cnt'] }} <br/> 질문자 : {{ $data['name'] }}</span>
                     </div>
                 </div> 
             </div>

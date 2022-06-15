@@ -52,7 +52,7 @@ function like(answer_id){
         <div id="div_regist">
             <form class="form-signin" method="POST" action="{{ route('regist_answer') }}">
             @csrf
-                <h1 class="h3 mb-3 font-weight-normal"  style="margin-left:10%;margin-top:100px;">{{ $list->question->question }}</h1>
+                <h1 class="h3 mb-3 font-weight-normal"  style="margin-left:10%;margin-top:100px;">Q.{{ $list->question->question }}</h1>
                 <textarea name="answer" id="answer" class="form-control" placeholder="자유롭게 답변해 주세요." required autofocus></textarea>
                 <input type="hidden" name="question_id" value="{{ $list->question->id }}"/>
                 <button class="btn btn-primary btn-block" id="btn_regist" style="margin-left:80%;" type="submit">등록</button>
@@ -89,7 +89,7 @@ function like(answer_id){
                     </div>
                     
                     <div style="width:70%;text-align:right;float:right;">
-                      <span style="color:gray;font-size:11pt;" onclick="go_page('{{$answer['user_id']}}')"> {{ $answer['user_id'] }} <span><br/>
+                      <span style="color:gray;font-size:11pt;" onclick="go_page('{{$answer['user_id']}}')"> {{ $answer['name'] }} <span><br/>
                       <span style="color:gray;font-size:9pt; ">  작성시간 : {{ $answer['created_at'] }} <span>
                     </div>
                 </div> 

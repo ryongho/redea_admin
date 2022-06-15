@@ -103,7 +103,7 @@ class UserController extends Controller
         $user = User::where('user_id' , $request->user_id)->where('leave','N')->first();
 
         //$question = Question::where('id',$question_id)->first();
-        $answers = Answer::where('user_id',$user->id)->get();
+        $answers = Answer::where('user_id',$user->id)->orderby('id','desc')->get();
         $ques = array();
         $i = 0;
 
@@ -133,7 +133,7 @@ class UserController extends Controller
         $user_info = Auth::user();
         $user = User::where('id', $user_info->id)->first();
 
-        $answers = Answer::where('user_id',$user->id)->get();
+        $answers = Answer::where('user_id',$user->id)->orderby('id','desc')->get();
         $ques = array();
         $i = 0;
 

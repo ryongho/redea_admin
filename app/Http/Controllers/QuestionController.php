@@ -34,7 +34,7 @@ class QuestionController extends Controller
                 if($i > 0){
                     $result2 = Tag::insert([
                         'q_id'=> $result ,
-                        'tag'=> $tag ,
+                        'tag'=> trim($tag) ,
                         'created_at'=> Carbon::now(),
                     ]);
                 }
@@ -69,6 +69,7 @@ class QuestionController extends Controller
         $question = Question::select(   
             '*',
             DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+            DB::raw('(select name from users where questions.user_id = users.id) as name'),
             DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
             )
             ->where('id',$question_id)->first();
@@ -76,6 +77,7 @@ class QuestionController extends Controller
         $answers = Answer::select(   
             '*',
             DB::raw('(select user_id from users where answers.user_id = users.id) as user_id'),
+            DB::raw('(select name from users where answers.user_id = users.id) as name'),
             DB::raw('(select count(*) from likes where likes.user_id ="'.$user_id.'" and answers.id = likes.answer_id) as is_like'),
             DB::raw('(select count(*) from likes where answers.id = likes.answer_id) as cnt_like'),
             )
@@ -103,6 +105,7 @@ class QuestionController extends Controller
         $rows = Question::select(   
                 '*',
                 DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+                DB::raw('(select name from users where questions.user_id = users.id) as name'),
                 DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
                 DB::raw('(select group_concat(tag ,"") from tags where tags.q_id = questions.id) as tag_str'),
                 )
@@ -121,6 +124,36 @@ class QuestionController extends Controller
         
     }
 
+    public static function get_list_search(Request $request){
+        $row = 100;
+        
+        $q_arr = Tag::select('q_id')->where('tag',"=","일기")->get();
+
+        $rows = Question::select(   
+                '*',
+                DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+                DB::raw('(select name from users where questions.user_id = users.id) as name'),
+                DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
+                DB::raw('(select group_concat(tag ,"") from tags where tags.q_id = questions.id) as tag_str'),
+                )
+                ->whereIn('id',$q_arr)
+                ->limit($row)->orderby('id','desc')->get();
+
+        $count = Question::count();
+
+        $list = new \stdClass;
+
+        $list->status = "200";
+        $list->msg = "success";
+        
+        $list->data = $rows;
+        
+        return $list;
+        
+    }
+
+    
+
     public static function myque(){
 
         $user_id = Auth::id();
@@ -130,6 +163,7 @@ class QuestionController extends Controller
         $rows = Question::select(   
                 '*',
                 DB::raw('(select user_id from users where questions.user_id = users.id) as user_id'),
+                DB::raw('(select name from users where questions.user_id = users.id) as name'),
                 DB::raw('(select count(*) from answers where questions.id = answers.question_id) as ans_cnt'),
                 )
                 ->where('questions.user_id',$user_id)

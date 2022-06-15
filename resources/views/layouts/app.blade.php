@@ -69,6 +69,9 @@
       input{
         margin-top:30px;
       }
+      .pointer{
+          cursor:pointer;
+      }
       #question{
           width:80%;
           margin-left:10%;
@@ -90,7 +93,6 @@
           width:80%;
           margin-left:10%;
           text-align:left;
-          cursor:pointer;
       }
       .h3{
           font-size:18px;
@@ -109,6 +111,12 @@
         overflow: auto;
         white-space: pre-wrap; /* pre tag내에 word wrap */
       }
+      .div_tags{
+        text-align:left;
+        color:gray;
+        font-size:10pt;
+      }
+      
 
       
     </style>
@@ -157,7 +165,11 @@
     }
 
     function go_page(user_id){
-      location.href="/page/"+user_id;
+        location.href="/page/"+user_id;
+    }
+
+    function go_search(tag){
+        location.href="/search/"+tag;
     }
 
   </script>
