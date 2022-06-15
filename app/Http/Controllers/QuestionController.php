@@ -202,6 +202,35 @@ class QuestionController extends Controller
         return $tags;
 
     }
+
+    public function delete(Request $request){
+        $login_user = Auth::user();
+        $user_id = $login_user->getId();
+        $que_info = Question::where('id',$request->id)->first();
+
+        $return = new \stdClass;
+
+        if($user_id == $que_info->user_id){
+            
+            $result = Question::where('id',$request->id)->delete();
+            if($result){
+                Answer::where('question_id',$request->id)->delete();
+            }
+            $return->status = "200";
+            $return->msg = "삭제했습니다.";
+            return redirect()->route('myque')->with('alert',$return->msg);   
+
+        }else{
+
+            $return->status = "500";
+            $return->msg = "삭제권한이 없습니다.";
+            return redirect()->back()->with('alert',$return->msg);
+        
+        }
+
+
+        
+    }
     
     
 

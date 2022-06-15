@@ -58,4 +58,4 @@ Route::middleware('auth:sanctum')->get('/mypage', [UserController::class, 'mypag
 Route::get('/user/regist', [UserController::class, 'regist'])->name('user_resegist');
 Route::post('/user/regist_proc', [UserController::class, 'regist_proc'])->name('user_regist_proc');
 Route::middleware('auth:sanctum')->post('/like', [LikeController::class, 'toggle'])->name('like');
-
+Route::middleware('auth:sanctum')->get('/delete/que/{id}', [QuestionController::class, 'delete'])->name('delete_que');

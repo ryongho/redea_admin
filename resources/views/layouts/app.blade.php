@@ -172,6 +172,22 @@
         location.href="/search/"+tag;
     }
 
+    
+
+  </script>
+
+<script type="text/javascript">
+    const msg = '{{Session::get('alert')}}';
+    const exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+
+    const go_signup = function(){
+      window.location.href="/user/regist";
+    }
+
+    
   </script>
 
     
