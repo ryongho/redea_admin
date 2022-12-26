@@ -70,8 +70,8 @@
                 </a>
                 <div class="navbar-nav w-100">
                     <div class="nav-item dropdown">
-                        <a href="{{route('user_list')}}" class="dropdown-item">회원 목록</a>
-                        <!--<a href="{{route('partner_list')}}" class="dropdown-item">파트너 목록</a>
+                        <!--<a href="{{route('user_list')}}" class="dropdown-item">회원 목록</a>
+                        <a href="{{route('partner_list')}}" class="dropdown-item">파트너 목록</a>
                         <a href="{{route('reservation_list')}}" class="dropdown-item">예약 목록</a>
                         <a href="{{route('hotel_list')}}" class="dropdown-item">호텔 목록</a> 
                         <a href="{{route('room_list')}}" class="dropdown-item">객실 목록</a> 
