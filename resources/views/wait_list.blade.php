@@ -34,7 +34,7 @@
                                 <tbody id="data_table">
                                     @forelse($list->data as $data)
                                         <tr>
-                                            <td>{{ $data->user_idx }}</td>
+                                            <td>{{ $data->wait_idx }}</td>
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
                                             <td>{{ $data->organization }}</td>
