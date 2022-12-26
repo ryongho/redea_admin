@@ -40,10 +40,11 @@ Route::get('/', function () {
     return view('user_list', ['list' => $list]);
 })->name('user_list');
 
-Route::get('/list', function () {
-    $list = QuestionController::get_list();
-    return view('main', ['list' => $list]);
-})->name('list');
+Route::get('/wait_list', function () {
+    $list = UserController::get_wait_list();
+    dd($list);
+    //return view('wait_list', ['list' => $list]);
+})->name('wait_list');
 
 Route::get('/search/{tag}', function (Request $request) {
     $list = QuestionController::get_list_search($request);

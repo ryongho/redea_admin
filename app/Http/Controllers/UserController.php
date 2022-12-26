@@ -34,6 +34,21 @@ class UserController extends Controller
         
     }
 
+    public static function get_wait_list(){
+
+        $rows = DB::table('register_waitlist')->get();
+
+        $list = new \stdClass;
+
+        $list->status = "200";
+        $list->msg = "success";
+        
+        $list->data = $rows;
+        
+        return $list;
+        
+    }
+
     public function regist_proc(Request $request)
     {
         
