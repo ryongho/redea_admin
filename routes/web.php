@@ -35,8 +35,9 @@ Route::post('/login_proc', [UserController::class, 'login'])->name('login_proc')
 Route::middleware('auth:sanctum')->get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
-    $list = QuestionController::get_list();
-    return view('main', ['list' => $list]);
+    $list = UserController::get_list();
+    dd($list);
+    //return view('main', ['list' => $list]);
 })->name('main');
 
 Route::get('/list', function () {

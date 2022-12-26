@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Answer;
-use App\Models\Question;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +13,23 @@ class UserController extends Controller
     public function regist(Request $request)
     {
         return view('regist_user');
+    }
+
+    public function get_list(Request $request){
+        
+
+        $list = new \stdClass;
+        
+        $list = User::get();
+
+        $list->status = "200";
+        $list->msg = "success";
+        
+        $list->data = $answers;
+        $list->user = $user;
+    
+        return view('page', ['list' => $list]);
+
     }
 
     public function regist_proc(Request $request)
