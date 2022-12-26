@@ -15,7 +15,7 @@ class UserController extends Controller
         return view('regist_user');
     }
 
-    public function get_list(Request $request){
+    public function get_list(){
         
 
         $list = new \stdClass;
