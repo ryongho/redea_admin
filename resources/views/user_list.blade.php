@@ -39,9 +39,9 @@
                                     @forelse($list->data as $data)
                                         <tr>
                                             <td>{{ $data->user_idx }}</td>
-                                            <td>{{ $data['name'] }}</td>
-                                            <td>{{ $data['email'] }}</td>
-                                            <td>{{ $data['organization'] }}</td>
+                                            <td>{{ $data->name }}</td>
+                                            <td>{{ $data->email }}</td>
+                                            <td>{{ $data->organization }}</td>
                                             <td></td>
                                         </tr>
                                     @empty
