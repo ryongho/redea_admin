@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Login;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +21,7 @@ class UserController extends Controller
 
         $list = new \stdClass;
         
-        $list = User::get();
+        $list = Login::get();
 
         $list->status = "200";
         $list->msg = "success";
@@ -28,7 +29,9 @@ class UserController extends Controller
         $list->data = $answers;
         $list->user = $user;
     
-        return view('page', ['list' => $list]);
+        return response()->json($list, 200)->withHeaders([
+            'Content-Type' => 'application/json'
+        ]);;
 
     }
 
