@@ -16,23 +16,20 @@ class UserController extends Controller
         return view('regist_user');
     }
 
-    public function get_list(){
-        
+    public static function get_list(){
+        $row = 100;
+
+        $rows = Login::limit($row)->orderby('user_idx','desc')->get();
 
         $list = new \stdClass;
-        
-        $list = Login::get();
 
         $list->status = "200";
         $list->msg = "success";
         
-        $list->data = $answers;
-        $list->user = $user;
-    
-        return response()->json($list, 200)->withHeaders([
-            'Content-Type' => 'application/json'
-        ]);;
-
+        $list->data = $rows;
+        
+        return $list;
+        
     }
 
     public function regist_proc(Request $request)
