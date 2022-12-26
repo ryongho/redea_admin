@@ -20,11 +20,6 @@
                             <option selected value="">전체</option>
                             <option value="name">호텔 이름</option>
                         </select>
-                        <input type="hidden" id="temp_search_type" value="{{$list->search_type}}"/>
-                        <input type="text" id="datePicker-start" class="form-control" style="width:10%;float:left;margin-right:10px;" value="{{$list->start_date}}" />
-                        <input type="text" id="datePicker-end" class="form-control" style="width:10%;float:left;margin-right:10px;" value="{{$list->end_date}}" />
-                        <input class="form-control border-1" id="search_keyword" type="search" placeholder="Search" value="{{$list->search_keyword}}" style="width:30%;float:left;margin-right:\10px;">
-                        <button type="button" class="btn btn-outline-secondary m-2" id="btn_search" style="width:auto;float:left;margin:0px;" onclick="get_list(1)" >검색</button>
                     </div>
 
                     <div class="col-12">
