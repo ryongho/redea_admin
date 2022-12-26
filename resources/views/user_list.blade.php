@@ -56,11 +56,7 @@
                     </div>
 
 
-                    <nav aria-label="Page navigation" style="width:100%;">
-                        <ul class="pagination" style="width:300px;margin:auto;">
-
-                        </ul>
-                    </nav>
+                   
 
                 </div>
             </div>
