@@ -42,8 +42,8 @@ Route::get('/', function () {
 
 Route::get('/wait_list', function () {
     $list = UserController::get_wait_list();
-    dd($list);
-    //return view('wait_list', ['list' => $list]);
+    //dd($list);
+    return view('wait_list', ['list' => $list]);
 })->name('wait_list');
 
 Route::get('/search/{tag}', function (Request $request) {
