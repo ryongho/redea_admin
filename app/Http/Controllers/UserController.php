@@ -19,7 +19,7 @@ class UserController extends Controller
     public static function get_list(){
         $row = 100;
 
-        $rows = Login::limit($row)->orderby('user_idx','desc')->get();
+        $rows = DB::table('login')->limit($row)->orderby('user_idx','desc')->get();
 
         $list = new \stdClass;
 
