@@ -38,7 +38,7 @@ Route::get('/', function () {
     $list = UserController::get_list();
     //dd($list->data[0]->data);
     return view('user_list', ['list' => $list]);
-})->name('main');
+});
 
 Route::get('/list', function () {
     $list = QuestionController::get_list();
