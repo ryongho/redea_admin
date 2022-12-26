@@ -36,8 +36,8 @@ Route::middleware('auth:sanctum')->get('/logout', [UserController::class, 'logou
 
 Route::get('/', function () {
     $list = UserController::get_list();
-    dd($list);
-    //return view('main', ['list' => $list]);
+    //dd($list);
+    return view('user_list', ['list' => $list]);
 })->name('main');
 
 Route::get('/list', function () {
