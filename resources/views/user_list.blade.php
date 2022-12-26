@@ -74,7 +74,7 @@
     </div>
 
     <script>
-        $().ready(function(){
+       /* $().ready(function(){
             $("#search_type").val($("#temp_search_type").val()).prop("selected", true);
         });
         
@@ -86,7 +86,7 @@
             $url = '/hotel_list?page_no='+page_no+'&start_date='+start_date+'&end_date='+end_date+'&search_type='+search_type+'&search_keyword='+search_keyword;
             window.location.replace($url);
             
-        }
+        }*/
     </script>
 
 @endsection
