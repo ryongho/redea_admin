@@ -36,6 +36,7 @@ class UserController extends Controller
 
         $list->total_page = floor($count/$row)+1;
         
+        $list->page_no = $page_no;
         $list->status = "200";
         $list->msg = "success";
         
@@ -300,7 +301,7 @@ class UserController extends Controller
         $list->status = "200";
         $list->msg = "success";
         
-        $list->page_no = $page_no;
+        $list->page_no = $request->page_no;
         $list->start_date = $start_date;
         $list->end_date = $end_date;
         $list->search_type = $request->search_type;
