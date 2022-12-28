@@ -35,7 +35,7 @@ Route::post('/login_proc', [UserController::class, 'login'])->name('login_proc')
 Route::middleware('auth:sanctum')->get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/', function (Request $request) {
-    dd($request);
+    dd($request->pgae_no);
     $list = UserController::get_list($request);
     //dd($list->data[0]->data);
     return view('user_list', ['list' => $list]);
