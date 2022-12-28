@@ -55,10 +55,9 @@
       <form class="form-signin" method="POST" action="{{ route('login_proc') }}">
         @csrf
         <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
-        <input type="email" name="email" id="inputId" class="form-control" placeholder="Email" required autofocus>
+        <input type="id" name="id" id="inputId" class="form-control" placeholder="ID" required autofocus>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="submit">Login</button>  
-        <button class="btn btn-lg btn-dark btn-block" id="sign_btn" onclick="go_signup()" type="button">Sign UP</button>
       </form>  
     </div>
     

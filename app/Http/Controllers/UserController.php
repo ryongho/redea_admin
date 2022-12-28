@@ -125,6 +125,38 @@ class UserController extends Controller
 
     public function login(Request $request){
 
+
+        $return = new \stdClass;
+
+        if($request->id != "admin"){
+            $return->status = "501";
+            $return->msg = "로그인 할 수 없는 아이디 입니다.";
+            
+            return redirect()->back()->with('alert',$return->msg);
+        }else if ($request->password != 'docl202@') {
+            //echo("로그인 확인");
+            Auth::loginUsingId(75);
+            $login_user = Auth::user();
+
+            $token = $login_user->createToken('user');
+
+            $return->status = "200";
+            $return->msg = "성공";
+            $return->dormant = $login_user->dormant;
+            $return->token = $token->plainTextToken;
+
+            //dd($token->plainTextToken);
+            return redirect()->route('user_list');   
+        }else{
+            $return->status = "500";
+            $return->msg = "아이디 또는 패스워드가 일치하지 않습니다.";
+            
+            return redirect()->back()->with('alert',$return->msg);
+        }
+    }
+
+    public function login_temp(Request $request){
+
         $user = User::where('email' , $request->email)->where('leave','N')->first();
 
         $return = new \stdClass;
