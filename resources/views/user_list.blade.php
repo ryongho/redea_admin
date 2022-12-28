@@ -87,10 +87,6 @@
         });
         
         const get_list = function(page_no){
-            //const search_type = $("#search_type").val();
-            //const start_date = $("#datePicker-start").val();
-            //const end_date = $("#datePicker-end").val();
-            //const search_keyword = $("#search_keyword").val();
             $url = '/user_list?page_no='+page_no;
             window.location.replace($url);
             
