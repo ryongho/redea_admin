@@ -143,7 +143,7 @@ class UserController extends Controller
 
             $return->status = "200";
             $return->msg = "성공";
-            $return->dormant = $login_user->dormant;
+            //$return->dormant = $login_user->dormant;
             $return->token = $token;
 
             //dd($token->plainTextToken);
