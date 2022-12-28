@@ -46,7 +46,7 @@ class UserController extends Controller
         
     }
 
-    public static function get_wait_list(){
+    public static function get_wait_list(Request $request){
 
         $row = 30;
 
