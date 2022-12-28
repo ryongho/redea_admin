@@ -20,14 +20,24 @@ class UserController extends Controller
     public static function get_list(){
         $row = 30;
 
+        $page_no = 1;
+        if($request->page_no){
+            $page_no = $request->page_no;
+        }
+        $offset = (($page_no-1) * $row);
+        
+
         $rows = DB::table('login')->select('name','email','organization','user_idx')
-                ->limit($row)->orderby('user_idx','desc')->get();
+                ->limit($row)->orderby('user_idx','desc')->offset($offset)->get();
 
         $count = DB::table('login')->select('name','email','organization','user_idx')->count();
+
+        
         
         $list = new \stdClass;
 
         $list->total_page = floor($count/$row)+1;
+        
 
         $list->status = "200";
         $list->msg = "success";
