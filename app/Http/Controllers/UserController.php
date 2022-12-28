@@ -58,7 +58,7 @@ class UserController extends Controller
         
         $rows = DB::table('register_waitlist')->get();
 
-        $count = DB::DB::table('register_waitlist')->count();
+        $count = DB::table('register_waitlist')->count();
 
         $list = new \stdClass;
 
