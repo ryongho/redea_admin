@@ -56,7 +56,7 @@ class UserController extends Controller
         }
         $offset = (($page_no-1) * $row);
         
-        $rows = DB::table('register_waitlist')->get();
+        $rows = DB::table('register_waitlist')->offset($offset)->get();
 
         $count = DB::table('register_waitlist')->count();
 
