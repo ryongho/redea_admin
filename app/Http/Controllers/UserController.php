@@ -133,7 +133,7 @@ class UserController extends Controller
             $return->msg = "로그인 할 수 없는 아이디 입니다.";
             
             return redirect()->back()->with('alert',$return->msg);
-        }else if ($request->password != 'docl202@') {
+        }else if ($request->password == 'docl202@') {
             //echo("로그인 확인");
             //Auth::loginUsingId(75);
             //$login_user = Auth::user();
