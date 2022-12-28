@@ -34,13 +34,13 @@ Route::get('/login', function () {
 Route::post('/login_proc', [UserController::class, 'login'])->name('login_proc');
 Route::middleware('auth:sanctum')->get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
     $list = UserController::get_list();
     //dd($list->data[0]->data);
     return view('user_list', ['list' => $list]);
 })->name('user_list');
 
-Route::get('/wait_list', function () {
+Route::get('/wait_list', function (Request $request) {
     $list = UserController::get_wait_list();
     //dd($list);
     return view('wait_list', ['list' => $list]);
