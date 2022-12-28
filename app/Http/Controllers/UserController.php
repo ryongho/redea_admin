@@ -48,10 +48,23 @@ class UserController extends Controller
 
     public static function get_wait_list(){
 
+        $row = 30;
+
+        $page_no = 1;
+        if($request->page_no){
+            $page_no = $request->page_no;
+        }
+        $offset = (($page_no-1) * $row);
+        
         $rows = DB::table('register_waitlist')->get();
+
+        $count = DB::DB::table('register_waitlist')->count();
 
         $list = new \stdClass;
 
+        $list->total_page = floor($count/$row)+1;
+        
+        $list->page_no = $page_no;
         $list->status = "200";
         $list->msg = "success";
         

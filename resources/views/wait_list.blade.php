@@ -53,6 +53,20 @@
                         </div>
                     </div>
 
+                    <nav aria-label="Page navigation" style="width:100%;">
+                        <ul class="pagination" style="width:300px;margin:auto;">
+
+                        @for($i= 1; $i < $list->total_page; $i++)
+                            @if($i == $list->page_no)
+                                <li class="page-item active"><a class="page-link" href="#" onclick="get_list({{$i}})" value="'{{$i}}'">{{$i}}</a></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="#" onclick="get_list({{$i}})" value="'{{$i}}'">{{$i}}</a></li>
+                            @endif
+                        @endfor
+
+                        </ul>
+                    </nav>
+
 
                    
 
