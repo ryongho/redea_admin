@@ -18,12 +18,16 @@ class UserController extends Controller
     }
 
     public static function get_list(){
-        $row = 100;
+        $row = 30;
 
         $rows = DB::table('login')->select('name','email','organization','user_idx')
                 ->limit($row)->orderby('user_idx','desc')->get();
 
+        $count = DB::table('login')->select('name','email','organization','user_idx')->count();
+        
         $list = new \stdClass;
+
+        $list->total_page = floor($count/$row)+1;
 
         $list->status = "200";
         $list->msg = "success";

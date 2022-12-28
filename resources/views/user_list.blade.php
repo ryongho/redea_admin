@@ -56,7 +56,19 @@
                     </div>
 
 
-                   
+                    <nav aria-label="Page navigation" style="width:100%;">
+                        <ul class="pagination" style="width:300px;margin:auto;">
+
+                        @for($i= 1; $i < $list->total_page; $i++)
+                            @if($i == $list->page_no)
+                                <li class="page-item active"><a class="page-link" href="#" onclick="get_list({{$i}})" value="'{{$i}}'">{{$i}}</a></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="#" onclick="get_list({{$i}})" value="'{{$i}}'">{{$i}}</a></li>
+                            @endif
+                        @endfor
+
+                        </ul>
+                    </nav>
 
                 </div>
             </div>
@@ -70,19 +82,19 @@
     </div>
 
     <script>
-       /* $().ready(function(){
+        $().ready(function(){
             $("#search_type").val($("#temp_search_type").val()).prop("selected", true);
         });
         
         const get_list = function(page_no){
-            const search_type = $("#search_type").val();
-            const start_date = $("#datePicker-start").val();
-            const end_date = $("#datePicker-end").val();
-            const search_keyword = $("#search_keyword").val();
-            $url = '/hotel_list?page_no='+page_no+'&start_date='+start_date+'&end_date='+end_date+'&search_type='+search_type+'&search_keyword='+search_keyword;
+            //const search_type = $("#search_type").val();
+            //const start_date = $("#datePicker-start").val();
+            //const end_date = $("#datePicker-end").val();
+            //const search_keyword = $("#search_keyword").val();
+            $url = '/user_list?page_no='+page_no;
             window.location.replace($url);
             
-        }*/
+        }
     </script>
 
 @endsection
