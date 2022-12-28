@@ -17,7 +17,7 @@ class UserController extends Controller
         return view('regist_user');
     }
 
-    public function get_list(Request $request){
+    public static function get_list(Request $request){
         $row = 30;
 
         $page_no = 1;
