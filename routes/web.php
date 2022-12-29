@@ -34,7 +34,7 @@ Route::get('/login', function () {
 Route::post('/login_proc', [UserController::class, 'login'])->name('login_proc');
 
 Route::middleware('auth:sanctum')->get('/', function () {
-    return redirect('/user_list'); 
+    return redirect('/login'); 
 });
 
 Route::middleware('auth:sanctum')->get('/logout', [UserController::class, 'logout'])->name('logout');
