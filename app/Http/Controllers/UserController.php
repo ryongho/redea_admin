@@ -137,7 +137,7 @@ class UserController extends Controller
 
             
             //echo("로그인 확인");
-            Auth::loginUsingId($user->user_id);
+            Auth::loginUsingId($user->id);
             $login_user = Auth::user();
 
             $token = $login_user->createToken('user');
