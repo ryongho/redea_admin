@@ -124,7 +124,7 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
-
+        $user = User::where('user_id' , $request->id)->first();
 
         $return = new \stdClass;
 
@@ -135,7 +135,7 @@ class UserController extends Controller
             return redirect()->back()->with('alert',$return->msg);
         }else if ($request->password == $user->password) {
 
-            $user = User::where('user_id' , $request->id)->first();
+            
             //echo("로그인 확인");
             Auth::loginUsingId($user->user_id);
             $login_user = Auth::user();
