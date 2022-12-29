@@ -133,21 +133,22 @@ class UserController extends Controller
             $return->msg = "로그인 할 수 없는 아이디 입니다.";
             
             return redirect()->back()->with('alert',$return->msg);
-        }else if ($request->password == 'docl202@') {
-            //echo("로그인 확인");
-            //Auth::loginUsingId(75);
-            //$login_user = Auth::user();
+        }else if ($request->password, $user->password) {
 
-            //$token = $login_user->createToken('user');
-            $token = '1sdljfisjfwelifjsf123df';
+            $user = User::where('user_id' , $request->id)->first();
+            //echo("로그인 확인");
+            Auth::loginUsingId($user->user_id);
+            $login_user = Auth::user();
+
+            $token = $login_user->createToken('user');
 
             $return->status = "200";
             $return->msg = "성공";
-            //$return->dormant = $login_user->dormant;
-            $return->token = $token;
+            $return->dormant = $login_user->dormant;
+            $return->token = $token->plainTextToken;
 
             //dd($token->plainTextToken);
-            return redirect()->route('user_list');   
+            return redirect()->route('main');   
         }else{
             $return->status = "500";
             $return->msg = "아이디 또는 패스워드가 일치하지 않습니다.";
