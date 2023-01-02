@@ -54,7 +54,7 @@ Route::middleware('auth:sanctum')->get('/accept', function (Request $request) {
 })->name('accept');
 
 Route::middleware('auth:sanctum')->get('/un_accept', function (Request $request) {
-    $result = UserController::accept($request);
+    $result = UserController::un_accept($request);
 })->name('un_accept');
 
 Route::get('/search/{tag}', function (Request $request) {
