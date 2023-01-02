@@ -49,6 +49,10 @@ Route::middleware('auth:sanctum')->get('/wait_list', function (Request $request)
     return view('wait_list', ['list' => $list]);
 })->name('wait_list');
 
+Route::middleware('auth:sanctum')->get('/accept', function (Request $request) {
+    $result = UserController::accept($request);
+})->name('accept');
+
 Route::get('/search/{tag}', function (Request $request) {
     $list = QuestionController::get_list_search($request);
     return view('main', ['list' => $list]);

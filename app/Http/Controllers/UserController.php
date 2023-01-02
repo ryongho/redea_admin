@@ -123,6 +123,22 @@ class UserController extends Controller
         
     }
 
+    public function accept(Request $request){
+        $idx = $request->idx;
+
+        $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update('accept',1);
+
+        if($result){
+            return redirect()->route('wait_list');
+        }else{
+            $return->status = "500";
+            $return->msg = "허용 처리 실패";
+            return redirect()->back()->with('alert',$return->msg);
+        }
+
+
+    }
+
     public function login(Request $request){
         $user = User::where('user_id' , $request->id)->first();
 

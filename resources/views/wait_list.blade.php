@@ -88,6 +88,7 @@
     <script>
         $().ready(function(){
             $("#search_type").val($("#temp_search_type").val()).prop("selected", true);
+            
         });
         
         const get_list = function(page_no){
@@ -97,7 +98,7 @@
         }
 
         const accept = function(idx){
-            alert(idx);
+            window.location.href="/accept?idx="+idx;
         }
     </script>
 
