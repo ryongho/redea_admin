@@ -125,8 +125,10 @@ class UserController extends Controller
 
     public static function accept(Request $request){
         $idx = $request->idx;
+        $key = 'accepted';
+        $value = 1;
 
-        $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update('accepted',1);
+        $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update([$key => $value]);
 
         if($result){
             return redirect()->route('wait_list');
