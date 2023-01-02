@@ -136,33 +136,37 @@ class UserController extends Controller
         $emails[0] = $wait->email;
 
         $mail = new PHPMailer(true); 
-    
+
         try {
  
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->CharSet = 'UTF-8';
-            $mail->Encoding = 'base64';
-            $mail->Host = 'email-smtp.ap-northeast-2.amazonaws.com';      // Specify main and backup server
-            $mail->SMTPAuth = true;    
+            // Email server settings
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'mail-smtp.ap-northeast-2.amazonaws.com';             //  smtp host
+            $mail->SMTPAuth = true;
+            $mail->Username = 'AKIAZJ2MNH4RPTLVQDMT';   //  sender username
+            $mail->Password = 'BIHFnXfQ1sayzkg4YHqBO3sTf9eL6Dw0mXGxGmroGsRX';       // sender password
+            $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
+            $mail->Port = 587;                          // port - 587/465
  
-            $mail->Username = 'AKIAZJ2MNH4RPTLVQDMT';                   // SMTP username
-        
-            $mail->Password = "BIHFnXfQ1sayzkg4YHqBO3sTf9eL6Dw0mXGxGmroGsRX";               // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
-            $mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
-            $mail->setFrom('redea.help@gmail.com', 'Redea');     //Set who the message is to be sent from
-            $mail->addAddress('redea.help@gmail.com');  // Add a recipient
-            $mail->isHTML(true);                                  // Set email format to HTML
-            //$mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet); //////// FOR AWS SES
-            $mail->Subject = "welcome";
-            $mail->Body = "welcome!!";
+            $mail->setFrom('redea.help@gmail.com', 'Redea');
+            $mail->addAddress($wait->email);
+            //$mail->addCC($request->emailCc);
+            //$mail->addBCC($request->emailBcc);
+ 
+            $mail->addReplyTo('redea.help@gmail.com', 'Redea');
  
             if(isset($_FILES['emailAttachments'])) {
                 for ($i=0; $i < count($_FILES['emailAttachments']['tmp_name']); $i++) {
                     $mail->addAttachment($_FILES['emailAttachments']['tmp_name'][$i], $_FILES['emailAttachments']['name'][$i]);
                 }
             }
-            
+ 
+ 
+            $mail->isHTML(false);                // Set email content format to HTML
+ 
+            $mail->Subject = "welcome";
+            $mail->Body = "welcome!!";
  
             // $mail->AltBody = plain text version of email body;
  
@@ -178,7 +182,9 @@ class UserController extends Controller
              return back()->with('error','Message could not be sent.');
         }
 
-        return redirect()->route('wait_list');
+
+    
+       return redirect()->route('wait_list');
 
     
         /*if($result){
