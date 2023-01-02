@@ -40,7 +40,11 @@
                                             <td>{{ $data->organization }}</td>
                                             <td>{{ $data->purpose }}</td>
                                             <td>{{ $data->timestamp }}</td>
-                                            <td></td>
+                                            @if($data->accept)
+                                             <td><button class="btn btn-primary btn-block" id="btn_accept" style="margin-left:80%;" type="button">허용하기</button></td>
+                                            @else
+                                             <td>이미 허용</td>
+                                            @endif
                                         </tr>
                                     @empty
                                         <tr>

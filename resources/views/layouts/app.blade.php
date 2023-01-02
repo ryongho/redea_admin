@@ -65,12 +65,12 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="{{route('user_list')}}" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary">관리자 페이지</h3>
                 </a>
                 <div class="navbar-nav w-100">
                     <div class="nav-item dropdown">
-                        <a href="{{route('user_list')}}" class="dropdown-item">회원 목록</a>
+                        <a href="{{route('user_list')}}" class="dropdown-item"로그인 회원 목록</a>
                         <a href="{{route('wait_list')}}" class="dropdown-item">대기자 목록</a>
                     </div>
                     <!--<a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>

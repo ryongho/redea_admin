@@ -148,7 +148,7 @@ class UserController extends Controller
             $return->token = $token->plainTextToken;
 
             //dd($token->plainTextToken);
-            return redirect()->route('user_list');   
+            return redirect()->route('wait_list');   
         }else{
             $return->status = "500";
             $return->msg = "아이디 또는 패스워드가 일치하지 않습니다.";

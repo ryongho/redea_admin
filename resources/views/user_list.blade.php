@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 
-@section('title', '회원목록')
+@section('title', '로그인 회원목록')
 
 @section('sidebar')
     @parent
@@ -32,7 +32,6 @@
                                         <th scope="col">이름</th>
                                         <th scope="col">이메일</th>
                                         <th scope="col">소속</th>
-                                        <th scope="col">허용</th>
                                     </tr>
                                 </thead>
                                 <tbody id="data_table">
@@ -42,7 +41,6 @@
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
                                             <td>{{ $data->organization }}</td>
-                                            <td></td>
                                         </tr>
                                     @empty
                                         <tr>
