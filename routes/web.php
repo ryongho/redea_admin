@@ -32,6 +32,8 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login_proc', [UserController::class, 'login'])->name('login_proc');
+Route::middleware('auth:sanctum')->get('/accept', [UserController::class, 'accept'])->name('accept');
+Route::middleware('auth:sanctum')->get('/un_accept', [UserController::class, 'un_accept'])->name('un_accept');
 
 Route::middleware('auth:sanctum')->get('/', function () {
     return redirect('/login'); 
@@ -49,14 +51,14 @@ Route::middleware('auth:sanctum')->get('/wait_list', function (Request $request)
     return view('wait_list', ['list' => $list]);
 })->name('wait_list');
 
-Route::middleware('auth:sanctum')->get('/accept', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/accept', function (Request $request) {
     $result = UserController::accept($request);
 })->name('accept');
 
 Route::middleware('auth:sanctum')->get('/un_accept', function (Request $request) {
     $result = UserController::un_accept($request);
 })->name('un_accept');
-
+*/
 Route::get('/search/{tag}', function (Request $request) {
     $list = QuestionController::get_list_search($request);
     return view('main', ['list' => $list]);
