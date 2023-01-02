@@ -123,7 +123,7 @@ class UserController extends Controller
         
     }
 
-    public function accept(Request $request){
+    public static function accept(Request $request){
         $idx = $request->idx;
 
         $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update('accept',1);
