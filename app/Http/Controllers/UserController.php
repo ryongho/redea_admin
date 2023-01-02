@@ -134,7 +134,6 @@ class UserController extends Controller
         $wait = DB::table('register_waitlist')->where('wait_idx', $idx)->first();
         $emails = array();
         $emails[0] = $wait->email;
-        UsersController::send_mail($emails, "We are prepared to serve you!", 'welcome.html', 'redea.help@gmail.com');
 
         $mail = new PHPMailer(true); 
     
