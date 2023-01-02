@@ -9,6 +9,7 @@ use App\Models\Login;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use PHPMailer\PHPMailer\PHPMailer; 
 
 class UserController extends Controller
 {
@@ -130,8 +131,13 @@ class UserController extends Controller
 
         $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update([$key => $value]);
 
+        $wait = DB::table('register_waitlist')->where('wait_idx', $idx)->first();
+        $emails = array();
+        $emails[0] = $wait->email;
+        $this->send_mail($emails, "We are prepared to serve you!", 'welcome.html', 'redea.help@gmail.com');
         return redirect()->route('wait_list');
 
+    
         /*if($result){
             return redirect()->route('wait_list');
         }else{
@@ -151,6 +157,7 @@ class UserController extends Controller
         $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update([$key => $value]);
 
         return redirect()->route('wait_list');
+        $this->send_mail();
 
         /*if($result){
             return redirect()->route('wait_list');
@@ -162,6 +169,57 @@ class UserController extends Controller
 
 
     }
+
+    public static function send_mail($email_vars, $subject, $template_url, $contact) {
+        //returns true on success,
+        //returns info on failure
+    
+        $mail = new PHPMailer(true); 
+    
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
+        // $mail->Host = 'smtp.gmail.com';      // Specify main and backup server
+        $mail->Host = 'email-smtp.ap-northeast-2.amazonaws.com';      // Specify main and backup server
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        // $mail->Username = 'redea.help@gmail.com';                   // SMTP username
+        $mail->Username = 'AKIAZJ2MNH4RPTLVQDMT';                   // SMTP username
+        // $mail->Password = GMAILPASSW;               // SMTP password
+        $mail->Password = "BIHFnXfQ1sayzkg4YHqBO3sTf9eL6Dw0mXGxGmroGsRX";               // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+        $mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
+        $mail->setFrom('redea.help@gmail.com', 'Redea');     //Set who the message is to be sent from
+        $mail->addAddress($contact);  // Add a recipient
+        // $mail->addAddress('ellen@example.com');               // Name is optional
+        // $mail->addCC('cc@example.com');
+        // $mail->addBCC('bcc@example.com');
+        // $mail->WordWrap = 50;                                 // Set word wrap to 50 characters
+        // $mail->addAttachment('/usr/labnol/file.doc');         // Add attachments
+        // $mail->addAttachment('/images/image.jpg', 'new.jpg'); // Optional name
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet); //////// FOR AWS SES
+    
+        $mail->Subject = $subject;
+        // $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
+        //Read an HTML message body from an external file, convert referenced images to embedded,
+        //convert HTML into a basic plain-text alternative body
+        $body = file_get_contents(dirname(dirname(__FILE__)).'/mail_templates/'.$template_url);
+        if(isset($email_vars)){
+            foreach($email_vars as $k=>$v){
+                $body = str_replace('{'.strtoupper($k).'}', $v, $body);
+            }
+        }
+        $mail->msgHTML($body, dirname(dirname(__FILE__))."/mail_templates");
+    
+        if(!$mail->send()) {
+           return $mail->ErrorInfo;
+       }
+       return true;
+    }
+
+    
 
     public function login(Request $request){
         $user = User::where('user_id' , $request->id)->first();
@@ -229,6 +287,7 @@ class UserController extends Controller
             return redirect()->back()->with('alert',$return->msg);
         }
     }
+
 
     public function page(Request $request){
         $user = User::where('user_id' , $request->user_id)->where('leave','N')->first();
