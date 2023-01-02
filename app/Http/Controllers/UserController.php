@@ -134,7 +134,7 @@ class UserController extends Controller
         $wait = DB::table('register_waitlist')->where('wait_idx', $idx)->first();
         $emails = array();
         $emails[0] = $wait->email;
-        $this->send_mail($emails, "We are prepared to serve you!", 'welcome.html', 'redea.help@gmail.com');
+        send_mail($emails, "We are prepared to serve you!", 'welcome.html', 'redea.help@gmail.com');
         return redirect()->route('wait_list');
 
     
@@ -157,7 +157,6 @@ class UserController extends Controller
         $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update([$key => $value]);
 
         return redirect()->route('wait_list');
-        $this->send_mail();
 
         /*if($result){
             return redirect()->route('wait_list');
