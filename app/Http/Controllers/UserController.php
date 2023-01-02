@@ -142,7 +142,7 @@ class UserController extends Controller
             // Email server settings
             $mail->SMTPDebug = 0;
             $mail->isSMTP();
-            $mail->Host = 'mail-smtp.ap-northeast-2.amazonaws.com';             //  smtp host
+            $mail->Host = 'email-smtp.ap-northeast-2.amazonaws.com';             //  smtp host
             $mail->SMTPAuth = true;
             $mail->Username = 'AKIAZJ2MNH4RPTLVQDMT';   //  sender username
             $mail->Password = 'BIHFnXfQ1sayzkg4YHqBO3sTf9eL6Dw0mXGxGmroGsRX';       // sender password
@@ -161,14 +161,7 @@ class UserController extends Controller
                     $mail->addAttachment($_FILES['emailAttachments']['tmp_name'][$i], $_FILES['emailAttachments']['name'][$i]);
                 }
             }
-
-            $mail->SMTPOptions = array(
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
-            );
+            
  
  
             $mail->isHTML(false);                // Set email content format to HTML
