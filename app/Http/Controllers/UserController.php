@@ -168,7 +168,7 @@ class UserController extends Controller
             $mail->SMTPKeepAlive = true;
  
             $mail->Subject = "We are prepared to serve you!";
-            $mail->Body = file_get_contents(dirname(dirname(__FILE__)).'/mail_templates/welcome.html');
+            $mail->Body = file_get_contents('/lib/mail_templates/welcome.html');
  
             // $mail->AltBody = plain text version of email body;
  
@@ -255,7 +255,7 @@ class UserController extends Controller
     
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
-        $body = file_get_contents(dirname(dirname(__FILE__)).'/mail_templates/'.$template_url);
+        $body = file_get_contents('/lib/mail_templates/'.$template_url);
         if(isset($email_vars)){
             foreach($email_vars as $k=>$v){
                 $body = str_replace('{'.strtoupper($k).'}', $v, $body);
