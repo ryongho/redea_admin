@@ -70,7 +70,7 @@
                 </a>
                 <div class="navbar-nav w-100">
                     <div class="nav-item dropdown">
-                        <a href="{{route('user_list')}}" class="dropdown-item"로그인 회원 목록</a>
+                        <a href="{{route('user_list')}}" class="dropdown-item">로그인 회원 목록</a>
                         <a href="{{route('wait_list')}}" class="dropdown-item">대기자 목록</a>
                     </div>
                     <!--<a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>

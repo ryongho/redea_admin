@@ -28,7 +28,7 @@
                                         <th scope="col">소속</th>
                                         <th scope="col">목적</th>
                                         <th scope="col">등록일</th>
-                                        <th scope="col">허용</th>
+                                        <th scope="col">허용여부</th>
                                     </tr>
                                 </thead>
                                 <tbody id="data_table">
@@ -40,10 +40,10 @@
                                             <td>{{ $data->organization }}</td>
                                             <td>{{ $data->purpose }}</td>
                                             <td>{{ $data->timestamp }}</td>
-                                            @if($data->accept)
-                                             <td><button class="btn btn-primary btn-block" id="btn_accept" style="margin-left:80%;" type="button">허용하기</button></td>
+                                            @if($data->accepted)
+                                             <td> N <button class="btn btn-primary btn-block" id="btn_accept" onclick="accept({{ $data->wait_idx }})" style="margin-left:80%;" type="button">허용하기</button></td>
                                             @else
-                                             <td>이미 허용</td>
+                                             <td> Y </td>
                                             @endif
                                         </tr>
                                     @empty
@@ -94,6 +94,10 @@
             $url = '/wait_list?page_no='+page_no;
             window.location.replace($url);
             
+        }
+
+        const accept = function(idx){
+            alert(idx);
         }
     </script>
 
