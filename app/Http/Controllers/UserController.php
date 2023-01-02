@@ -137,15 +137,15 @@ class UserController extends Controller
 
             
             //echo("로그인 확인");
-            //Auth::loginUsingId($user->id);
-            //$login_user = Auth::user();
+            Auth::loginUsingId($user->id);
+            $login_user = Auth::user();
 
-            //$token = $login_user->createToken('user');
+            $token = $login_user->createToken('user');
 
             $return->status = "200";
             $return->msg = "성공";
-            //$return->dormant = $login_user->dormant;
-            //$return->token = $token->plainTextToken;
+            $return->dormant = $login_user->dormant;
+            $return->token = $token->plainTextToken;
 
             //dd($token->plainTextToken);
             return redirect()->route('user_list');   
