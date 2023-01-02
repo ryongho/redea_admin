@@ -135,6 +135,39 @@ class UserController extends Controller
         $emails = array();
         $emails[0] = $wait->email;
         UsersController::send_mail($emails, "We are prepared to serve you!", 'welcome.html', 'redea.help@gmail.com');
+
+        $mail = new PHPMailer(true); 
+    
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
+        $mail->Host = 'email-smtp.ap-northeast-2.amazonaws.com';      // Specify main and backup server
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        
+        $mail->Username = 'AKIAZJ2MNH4RPTLVQDMT';                   // SMTP username
+        
+        $mail->Password = "BIHFnXfQ1sayzkg4YHqBO3sTf9eL6Dw0mXGxGmroGsRX";               // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+        $mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
+        $mail->setFrom('redea.help@gmail.com', 'Redea');     //Set who the message is to be sent from
+        $mail->addAddress('redea.help@gmail.com');  // Add a recipient
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet); //////// FOR AWS SES
+    
+        $mail->Subject = $subject;
+        
+        /*$body = file_get_contents(dirname(dirname(__FILE__)).'/mail_templates/'.$template_url);
+        if(isset($email_vars)){
+            foreach($email_vars as $k=>$v){
+                $body = str_replace('{'.strtoupper($k).'}', $v, $body);
+            }
+        }*/
+        //$mail->msgHTML($body, dirname(dirname(__FILE__))."/mail_templates");
+        $mail->body = "welcome!!";
+        if(!$mail->send()) {
+           //return $mail->ErrorInfo;
+        }
+       
         return redirect()->route('wait_list');
 
     
