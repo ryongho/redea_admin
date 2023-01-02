@@ -154,20 +154,15 @@ class UserController extends Controller
             $mail->addAddress('redea.help@gmail.com');  // Add a recipient
             $mail->isHTML(true);                                  // Set email format to HTML
             //$mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet); //////// FOR AWS SES
-
-            $mail->Subject = $subject;
+            $mail->Subject = "welcome";
+            $mail->Body = "welcome!!";
  
             if(isset($_FILES['emailAttachments'])) {
                 for ($i=0; $i < count($_FILES['emailAttachments']['tmp_name']); $i++) {
                     $mail->addAttachment($_FILES['emailAttachments']['tmp_name'][$i], $_FILES['emailAttachments']['name'][$i]);
                 }
             }
- 
- 
-            $mail->isHTML(true);                // Set email content format to HTML
- 
-            $mail->Subject = "welcome";
-            $mail->Body = "welcome!!";
+            
  
             // $mail->AltBody = plain text version of email body;
  
