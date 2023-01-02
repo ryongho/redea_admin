@@ -130,13 +130,35 @@ class UserController extends Controller
 
         $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update([$key => $value]);
 
-        if($result){
+        return redirect()->route('wait_list');
+
+        /*if($result){
             return redirect()->route('wait_list');
         }else{
             $return->status = "500";
             $return->msg = "허용 처리 실패";
             return redirect()->back()->with('alert',$return->msg);
-        }
+        }*/
+
+
+    }
+
+    public static function un_accept(Request $request){
+        $idx = $request->idx;
+        $key = 'accepted';
+        $value = 0;
+
+        $result = DB::table('register_waitlist')->where('wait_idx', $idx)->update([$key => $value]);
+
+        return redirect()->route('wait_list');
+
+        /*if($result){
+            return redirect()->route('wait_list');
+        }else{
+            $return->status = "500";
+            $return->msg = "허용 처리 실패";
+            return redirect()->back()->with('alert',$return->msg);
+        }*/
 
 
     }

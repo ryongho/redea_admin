@@ -53,6 +53,10 @@ Route::middleware('auth:sanctum')->get('/accept', function (Request $request) {
     $result = UserController::accept($request);
 })->name('accept');
 
+Route::middleware('auth:sanctum')->get('/un_accept', function (Request $request) {
+    $result = UserController::accept($request);
+})->name('un_accept');
+
 Route::get('/search/{tag}', function (Request $request) {
     $list = QuestionController::get_list_search($request);
     return view('main', ['list' => $list]);
