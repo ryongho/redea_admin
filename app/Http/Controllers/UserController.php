@@ -168,7 +168,7 @@ class UserController extends Controller
             $mail->SMTPKeepAlive = true;
  
             $mail->Subject = "We are prepared to serve you!";
-            $mail->Body = file_get_contents(dirname(dirname(__FILE__)).'/lib/mail_templates/welcome.html');
+            $mail->Body = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/lib/mail_templates/welcome.html');
  
             // $mail->AltBody = plain text version of email body;
  
