@@ -41,7 +41,7 @@
                                             <td>{{ $data->purpose }}</td>
                                             <td>{{ $data->timestamp }}</td>
                                             @if(!$data->accepted)
-                                             <td style="width:100px;"> N <button class="btn btn-primary btn-small" id="btn_accept" onclick="accept({{ $data->wait_idx }})" style="margin-left:80%;" type="button">허용하기</button></td>
+                                             <td style="width:100px;"> N <button class="btn btn-primary btn-sm" id="btn_accept" onclick="accept({{ $data->wait_idx }})" style="margin-left:80%;" type="button">허용하기</button></td>
                                             @else
                                              <td> Y </td>
                                             @endif
