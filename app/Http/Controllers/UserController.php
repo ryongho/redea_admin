@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Login;
 use App\Models\User;
 use Illuminate\Support\Carbon;
@@ -169,7 +168,7 @@ class UserController extends Controller
             $mail->SMTPKeepAlive = true;
  
             $mail->Subject = "We are prepared to serve you!";
-            $mail->Body = Storage::disk('local')->get('welcome.html');
+            $mail->Body = file_get_contents(dirname(dirname(__FILE__)).'/mail_templates/welcome.html');
  
             // $mail->AltBody = plain text version of email body;
  
