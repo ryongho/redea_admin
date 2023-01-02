@@ -39,12 +39,12 @@ Route::middleware('auth:sanctum')->get('/', function () {
 
 Route::middleware('auth:sanctum')->get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/user_list', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user_list', function (Request $request) {
     $list = UserController::get_list($request);
     return view('user_list', ['list' => $list]);
 })->name('user_list');
 
-Route::get('/wait_list', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/wait_list', function (Request $request) {
     $list = UserController::get_wait_list($request);
     return view('wait_list', ['list' => $list]);
 })->name('wait_list');
