@@ -164,6 +164,7 @@ class UserController extends Controller
  
  
             $mail->isHTML(false);                // Set email content format to HTML
+            $mail->SMTPKeepAlive = true;
  
             $mail->Subject = "welcome";
             $mail->Body = "welcome!!";
