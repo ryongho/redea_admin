@@ -148,7 +148,7 @@ class UserController extends Controller
             $addr = env('MAIL_ADDR');
             $mail->setFrom($addr, 'Redea');
             $mail->addReplyTo($addr, 'Redea');
-
+            dd($mail);
             
             $mail->SMTPAuth = true;
             
