@@ -148,14 +148,14 @@ class UserController extends Controller
             $addr = env('MAIL_ADDR');
             $mail->setFrom($addr, 'Redea');
             $mail->addReplyTo($addr, 'Redea');
-            dd($mail);
+            
             
             $mail->SMTPAuth = true;
             
             
             $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
             $mail->Port = 587;                          // port - 587/465
- 
+            dd($mail);
             
             $mail->addAddress($wait->email);
             //$mail->addCC($request->emailCc);
