@@ -142,19 +142,26 @@ class UserController extends Controller
             // Email server settings
             $mail->SMTPDebug = 0;
             $mail->isSMTP();
-            $mail->Host = 'email-smtp.ap-northeast-2.amazonaws.com';             //  smtp host
+            $mail->Host = env('MAIL_HOST');
+            $mail->Username = env('MAIL_USERNAME');
+            $mail->Password = env('MAIL_PASSWORD');
+            $addr = env('MAIL_ADDR');
+            $mail->setFrom($addr, 'Redea');
+            $mail->addReplyTo($addr, 'Redea');
+
+            
             $mail->SMTPAuth = true;
-            $mail->Username = 'AKIAZJ2MNH4RPTLVQDMT';   //  sender username
-            $mail->Password = 'BIHFnXfQ1sayzkg4YHqBO3sTf9eL6Dw0mXGxGmroGsRX';       // sender password
+            
+            
             $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
             $mail->Port = 587;                          // port - 587/465
  
-            $mail->setFrom('redea.help@gmail.com', 'Redea');
+            
             $mail->addAddress($wait->email);
             //$mail->addCC($request->emailCc);
             //$mail->addBCC($request->emailBcc);
  
-            $mail->addReplyTo('redea.help@gmail.com', 'Redea');
+            
  
             if(isset($_FILES['emailAttachments'])) {
                 for ($i=0; $i < count($_FILES['emailAttachments']['tmp_name']); $i++) {
