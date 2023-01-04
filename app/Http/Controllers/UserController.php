@@ -155,7 +155,7 @@ class UserController extends Controller
             
             $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
             $mail->Port = 587;                          // port - 587/465
-            dd($mail);
+            
             
             $mail->addAddress($wait->email);
             //$mail->addCC($request->emailCc);
