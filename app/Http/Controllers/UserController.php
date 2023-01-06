@@ -158,7 +158,7 @@ class UserController extends Controller
             
             
             $mail->addAddress($wait->email);
-            dd($mail);
+            
             //$mail->addCC($request->emailCc);
             //$mail->addBCC($request->emailBcc);
  
