@@ -57,10 +57,7 @@ class UserController extends Controller
         $offset = (($page_no-1) * $row);
         
         $rows = DB::table('redea_tables')
-                ->select(   'table_idx',
-                            'name',
-                            'field_count',
-                            'record_count',
+                ->select(   '*',
                             DB::raw('(select count(*) from table_users where table_users.table_idx = redea_tables.table_idx) as user_cnt ')
                         )
                 ->limit($row)->orderby('table_idx','desc')->offset($offset)->get();
