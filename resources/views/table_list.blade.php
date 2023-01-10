@@ -82,7 +82,7 @@
         });
         
         const get_list = function(page_no){
-            $url = '/user_list?page_no='+page_no;
+            $url = '/table_list?page_no='+page_no;
             window.location.replace($url);
             
         }
