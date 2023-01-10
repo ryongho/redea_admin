@@ -57,13 +57,15 @@ class UserController extends Controller
         $offset = (($page_no-1) * $row);
         
         $rows = DB::table('redea_tables')
-                ->select(   '*',
+                ->select(   'table_idx',
+                            'name',
+                            'field_count',
+                            'record_count',
                             DB::raw('(select count(*) from table_users where table_users.table_idx = redea_tables.table_idx) as user_cnt ')
                         )
                 ->limit($row)->orderby('table_idx','desc')->offset($offset)->get();
-
-        dd($rows);
-        $count = DB::table('login')->select('name','email','organization','user_idx')->count();
+            
+        $count = DB::table('redea_tables')->select('*')->count();
 
         $list = new \stdClass;
 

@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 
-@section('title', '로그인 회원목록')
+@section('title', '테이블 목록')
 
 @section('sidebar')
     @parent
@@ -22,27 +22,26 @@
                             <table class="table table-bordered" style="font-size: 12px;">
                                 <thead>
                                     <tr>
-                                        <th scope="col">유저번호</th>
-                                        <th scope="col">이름</th>
-                                        <th scope="col">이메일</th>
-                                        <th scope="col">소속</th>
-                                        <th scope="col">테이블 수</th>
+                                        <th scope="col">테이블번호</th>
+                                        <th scope="col">테이블 이름</th>
+                                        <th scope="col">필드 수</th>
                                         <th scope="col">레코드 수</th>
+                                        <th scope="col">사용자</th>
                                     </tr>
                                 </thead>
+                                
                                 <tbody id="data_table">
                                     @forelse($list->data as $data)
                                         <tr>
-                                            <td>{{ $data->user_idx }}</td>
+                                            <td>{{ $data->table_idx }}</td>
                                             <td>{{ $data->name }}</td>
-                                            <td>{{ $data->email }}</td>
-                                            <td>{{ $data->organization }}</td>
-                                            <td>{{ $data->table_cnt }}</td>
+                                            <td>{{ $data->field_cnt }}</td>
                                             <td>{{ $data->record_cnt }}</td>
+                                            <td>{{ $data->user_cnt }}</td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" align="center">조회된 회원이 없습니다.</td>
+                                            <td colspan="8" align="center">조회된 테이블이 없습니다.</td>
                                         </tr>
                                     @endforelse   
 
