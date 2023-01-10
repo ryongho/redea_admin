@@ -61,7 +61,7 @@ class UserController extends Controller
                             DB::raw('(select count(*) from table_users where table_users.table_idx = redea_tables.table_idx) as user_cnt ')
                         )
                 ->limit($row)->orderby('table_idx','desc')->offset($offset)->get();
-            
+        dd($rows);
         $count = DB::table('redea_tables')->select('*')->count();
 
         $list = new \stdClass;
