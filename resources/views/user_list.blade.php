@@ -26,6 +26,7 @@
                                         <th scope="col">이름</th>
                                         <th scope="col">이메일</th>
                                         <th scope="col">소속</th>
+                                        <th scope="col">사용 테이블 수</th>
                                     </tr>
                                 </thead>
                                 <tbody id="data_table">
@@ -35,6 +36,7 @@
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
                                             <td>{{ $data->organization }}</td>
+                                            <td>{{ $data->table_cnt }}</td>
                                         </tr>
                                     @empty
                                         <tr>

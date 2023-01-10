@@ -28,10 +28,15 @@ class UserController extends Controller
         $offset = (($page_no-1) * $row);
         
 
-        $rows = DB::table('login')->select('name','email','organization','user_idx')
-                ->limit($row)->orderby('user_idx','desc')->offset($offset)->get();
+        $rows = DB::table('login')
+                    ->select('name',
+                            'email',
+                            'organization',
+                            'user_idx',
+                            DB::raw('(select count(*) from table_users where table_users.user_idx_idx = login.user_idx) as table_cnt '))
+                    ->limit($row)->orderby('user_idx','desc')->offset($offset)->get();
 
-        $count = DB::table('login')->select('name','email','organization','user_idx')->count();
+        $count = DB::table('login')->select('*')->count();
 
         $list = new \stdClass;
 
