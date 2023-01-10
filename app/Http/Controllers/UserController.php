@@ -33,7 +33,7 @@ class UserController extends Controller
                             'email',
                             'organization',
                             'user_idx',
-                            DB::raw('(select count(*) from table_users where table_users.user_idx_idx = login.user_idx) as table_cnt '))
+                            DB::raw('(select count(*) from table_users where table_users.user_idx = login.user_idx) as table_cnt '))
                     ->limit($row)->orderby('user_idx','desc')->offset($offset)->get();
 
         $count = DB::table('login')->select('*')->count();
