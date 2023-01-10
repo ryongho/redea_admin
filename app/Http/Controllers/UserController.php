@@ -47,6 +47,38 @@ class UserController extends Controller
         
     }
 
+    public static function get_table_list(Request $request){
+        $row = 30;
+
+        $page_no = 1;
+        if($request->page_no){
+            $page_no = $request->page_no;
+        }
+        $offset = (($page_no-1) * $row);
+        
+        $rows = DB::table('redea_tables')
+                ->select(   '*',
+                            DB::raw('(select count(*) from table_users where table_users.table_idx = redea_tables.table_idx) as user_cnt ')
+                        )
+                ->limit($row)->orderby('user_idx','desc')->offset($offset)->get();
+
+        dd($rows);
+        $count = DB::table('login')->select('name','email','organization','user_idx')->count();
+
+        $list = new \stdClass;
+
+        $list->total_page = floor($count/$row)+1;
+        
+        $list->page_no = $page_no;
+        $list->status = "200";
+        $list->msg = "success";
+        
+        $list->data = $rows;
+        
+        return $list;
+        
+    }
+
     public static function get_wait_list(Request $request){
 
         $row = 30;

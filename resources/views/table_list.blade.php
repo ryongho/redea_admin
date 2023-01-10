@@ -13,7 +13,7 @@
 
             <!-- Table Start -->
                     <div class="col-12 bg-white px-4 py-0" >
-                        <h6 class="mb-4" style="margin:30px 10px;">회원 목록</h6>
+                        <h6 class="mb-4" style="margin:30px 10px;">테이블 사용 현황</h6>
                     </div>
 
                     <div class="col-12">
@@ -26,6 +26,8 @@
                                         <th scope="col">이름</th>
                                         <th scope="col">이메일</th>
                                         <th scope="col">소속</th>
+                                        <th scope="col">테이블 수</th>
+                                        <th scope="col">레코드 수</th>
                                     </tr>
                                 </thead>
                                 <tbody id="data_table">
@@ -35,6 +37,8 @@
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
                                             <td>{{ $data->organization }}</td>
+                                            <td>{{ $data->table_cnt }}</td>
+                                            <td>{{ $data->record_cnt }}</td>
                                         </tr>
                                     @empty
                                         <tr>
