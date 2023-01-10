@@ -35,8 +35,8 @@
                                         <tr>
                                             <td>{{ $data->table_idx }}</td>
                                             <td>{{ $data->name }}</td>
-                                            <td>{{ $data->field_cnt }}</td>
-                                            <td>{{ $data->record_cnt }}</td>
+                                            <td>{{ $data->field_count }}</td>
+                                            <td>{{ $data->record_count }}</td>
                                             <td>{{ $data->user_cnt }}</td>
                                         </tr>
                                     @empty
