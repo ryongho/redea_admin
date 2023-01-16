@@ -79,7 +79,7 @@ class UserController extends Controller
                     }else{
                         $table_arr = (array) DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
                         $keyword = $search_arr[1];
-                        return $query->whereIn('table_idx' ,function($query,$keyword)
+                        return $query->whereIn('table_idx' ,function($keyword)
                         {
                             DB::table('table_users')->select('table_idx')->where('user_idx',$keyword);
                         });
