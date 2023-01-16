@@ -88,20 +88,16 @@
 
 @media (min-width: 992px) {
     .sidebar {
-        margin-left: 0;
     }
 
     .sidebar.open {
-        margin-left: -150px;
     }
 
     .content {
-        width: calc(100% - 150px);
     }
 
     .content.open {
         width: 100%;
-        margin-left: 0;
     }
 }
 
