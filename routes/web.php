@@ -55,19 +55,3 @@ Route::middleware('auth:sanctum')->get('/table_list', function (Request $request
     $list = UserController::get_table_list($request);
     return view('table_list', ['list' => $list]);
 })->name('table_list');
-
-Route::get('/search/{tag}', function (Request $request) {
-    $list = QuestionController::get_list_search($request);
-    return view('main', ['list' => $list]);
-})->name('search');
-
-Route::middleware('auth:sanctum')->post('/regist_que', [QuestionController::class, 'regist'])->name('regist_que');
-Route::get('/view_que/{question_id}', [QuestionController::class, 'view'])->name('view_que');
-Route::middleware('auth:sanctum')->post('/regist_answer', [AnswerController::class, 'regist'])->name('regist_answer');
-Route::get('/page/{user_id}', [UserController::class, 'page'])->name('page');
-Route::middleware('auth:sanctum')->get('/myque', [QuestionController::class, 'myque'])->name('myque');
-Route::middleware('auth:sanctum')->get('/mypage', [UserController::class, 'mypage'])->name('mypage');
-Route::get('/user/regist', [UserController::class, 'regist'])->name('user_resegist');
-Route::post('/user/regist_proc', [UserController::class, 'regist_proc'])->name('user_regist_proc');
-Route::middleware('auth:sanctum')->post('/like', [LikeController::class, 'toggle'])->name('like');
-Route::middleware('auth:sanctum')->get('/delete/que/{id}', [QuestionController::class, 'delete'])->name('delete_que');

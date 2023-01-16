@@ -13,10 +13,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class UserController extends Controller
 {
-    public function regist(Request $request)
-    {
-        return view('regist_user');
-    }
 
     public static function get_list(Request $request){
         $row = 30;
