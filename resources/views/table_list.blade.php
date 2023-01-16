@@ -96,7 +96,7 @@
             const search_type = $("#search_type").val();
             const search_keyword = $("#search_keyword").val();
             
-            $url = '/table_list?page_no='+page_no+'search_type='+search_type+'&search_keyword='+search_keyword;
+            $url = '/table_list?page_no='+page_no+'&search_type='+search_type+'&search_keyword='+search_keyword;
             
             window.location.replace($url);
             
