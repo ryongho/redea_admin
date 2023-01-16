@@ -77,25 +77,17 @@ class UserController extends Controller
                     if($search_arr[0] == "name"){
                         return $query->where('name',"like", "%".$search_arr[1]."%");
                     }else{
-                        $table_arr = (array) DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
-                        $keyword = $search_arr[1];
-                        return $query->whereIn('table_idx' ,function($keyword)
-                        {
-                            DB::table('table_users')->select('table_idx')->where('user_idx',$keyword);
-                        });
+                        $table_arr = DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
+                        $table_arr = (array) $table_arr;
+                        dd($table_arr);
+                        /*foreach($table_arr as $table){
+                            $table_arr_str .= $table->table_idx.",";
+                        }*/
+                        return $query->whereIn('table_idx' , $table_arr_str );
                     }
                         
                 })
                 ->limit($row)->orderby('table_idx','desc')->offset($offset)->get();
-
-                DB::table('users')
-                ->whereIn('id', function($query)
-                {
-                    $query->select(DB::raw(1))
-                        ->from('orders')
-                        ->whereRaw('orders.user_id = users.id');
-                })
-                ->get();
             
         $count = DB::table('redea_tables')->select('*')
                 ->when($search , function ($query, $search) {
@@ -103,7 +95,7 @@ class UserController extends Controller
                     if($search_arr[0] == "name"){
                         return $query->where('name',"like", "%".$search_arr[1]."%");
                     }else{
-                        $table_arr = (array) DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
+                        $table_arr = DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
                         return $query->whereIn('table_idx' , $table_arr);
                     }
                         
