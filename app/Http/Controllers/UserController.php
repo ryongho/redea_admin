@@ -57,6 +57,14 @@ class UserController extends Controller
         }
         $offset = (($page_no-1) * $row);
         
+        $search_type = $request->search_type;
+        $search_keyword = $request->search_keyword;
+
+        $search = null;
+        if($search_type){
+            $search = $request->search_type.",".$request->search_keyword;
+        }
+
         $rows = DB::table('redea_tables')
                 ->select(   'table_idx',
                             'name',
@@ -64,6 +72,17 @@ class UserController extends Controller
                             'record_count',
                             DB::raw('(select count(*) from table_users where table_users.table_idx = redea_tables.table_idx) as user_cnt ')
                         )
+                ->when($search , function ($query, $search) {
+                    $search_arr = explode(',',$search);
+                    if($search_arr[0] == "name"){
+                        return $query->where('name',"like", "%".$search_arr[1]."%");
+                    }else{
+                        $table_arr = DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
+                        dd($table_arr);
+                        return $query->where('' ,"like", "%".$search_arr[1]."%");
+                    }
+                        
+                })
                 ->limit($row)->orderby('table_idx','desc')->offset($offset)->get();
             
         $count = DB::table('redea_tables')->select('*')->count();
@@ -75,6 +94,8 @@ class UserController extends Controller
         $list->page_no = $page_no;
         $list->status = "200";
         $list->msg = "success";
+        $list->search_type = $request->search_type;
+        $list->search_keyword = $request->search_keyword;
         
         $list->data = $rows;
         

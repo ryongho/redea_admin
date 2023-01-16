@@ -16,6 +16,17 @@
                         <h6 class="mb-4" style="margin:30px 10px;">테이블 사용 현황</h6>
                     </div>
 
+                    <div class="col-12 bg-white px-4 py-0" style="float:left;">
+                        <select class="form-select search_type mb-1" id="search_type" aria-label=".search_type" style="width:auto;float:left;margin-right:10px;">
+                            <option selected value="">전체</option>
+                            <option value="name">테이블 이름</option>
+                            <option value="user_idx">사용자 번호</option>
+                        </select>
+                        <input type="hidden" id="temp_search_type" value="{{$list->search_type}}"/>
+                        <input class="form-control border-1" id="search_keyword" type="search" placeholder="Search" value="{{$list->search_keyword}}" style="width:30%;float:left;margin-right:\10px;">
+                        <button type="button" class="btn btn-outline-secondary m-2" id="btn_search" style="width:auto;float:left;margin:0px;" onclick="get_list(1)" >검색</button>
+                    </div>
+
                     <div class="col-12">
                         <div class="bg-white rounded h-100 p-4">
 
@@ -79,10 +90,15 @@
     <script>
         $().ready(function(){
             $("#search_type").val($("#temp_search_type").val()).prop("selected", true);
+            $("#sale").val("{{$list->sale}}").prop("selected", true);
         });
         
         const get_list = function(page_no){
-            $url = '/table_list?page_no='+page_no;
+            const search_type = $("#search_type").val();
+            const search_keyword = $("#search_keyword").val();
+            
+            $url = '/table_list?page_no='+page_no+'search_type='+search_type+'&search_keyword='+search_keyword;
+            
             window.location.replace($url);
             
         }
