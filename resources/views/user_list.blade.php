@@ -36,7 +36,7 @@
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
                                             <td>{{ $data->organization }}</td>
-                                            <td><a onclick="go_table_list({{ $data->user_idx }})">{{ $data->table_cnt }}</a></td>
+                                            <td><a style="cursor:pointer" onclick="go_table_list({{ $data->user_idx }})">{{ $data->table_cnt }}</a></td>
                                         </tr>
                                     @empty
                                         <tr>
