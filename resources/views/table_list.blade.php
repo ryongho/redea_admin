@@ -90,7 +90,6 @@
     <script>
         $().ready(function(){
             $("#search_type").val($("#temp_search_type").val()).prop("selected", true);
-            $("#sale").val("{{$list->sale}}").prop("selected", true);
         });
         
         const get_list = function(page_no){
