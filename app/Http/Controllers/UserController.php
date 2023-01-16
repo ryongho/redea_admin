@@ -77,7 +77,7 @@ class UserController extends Controller
                     if($search_arr[0] == "name"){
                         return $query->where('name',"like", "%".$search_arr[1]."%");
                     }else{
-                        $table_arr = DB::table('table_users')->pluck('table_idx')->where('user_idx',$search_arr[1]);
+                        $table_arr = DB::table('table_users')->where('user_idx',$search_arr[1])->pluck('table_idx')->toArray();
                         /*$table_arr = array();
                         foreach($table_obj as $table){
                             array_push($table_arr, $table->table_idx);
@@ -94,7 +94,7 @@ class UserController extends Controller
                     if($search_arr[0] == "name"){
                         return $query->where('name',"like", "%".$search_arr[1]."%");
                     }else{
-                        $table_arr = DB::table('table_users')->pluck('table_idx')->where('user_idx',$search_arr[1]);
+                        $table_arr = DB::table('table_users')->where('user_idx',$search_arr[1])->pluck('table_idx')->toArray();
                         /*$table_arr = array();
                         foreach($table_obj as $table){
                             array_push($table_arr, $table->table_idx);
