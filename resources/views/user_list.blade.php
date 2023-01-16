@@ -36,7 +36,7 @@
                                             <td>{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
                                             <td>{{ $data->organization }}</td>
-                                            <td>{{ $data->table_cnt }}</td>
+                                            <td><a onclick="go_table_list({{ $data->user_idx }})">{{ $data->table_cnt }}</a></td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -82,6 +82,12 @@
         
         const get_list = function(page_no){
             $url = '/user_list?page_no='+page_no;
+            window.location.replace($url);
+            
+        }
+
+        const go_table_list = function(user_idx){
+            $url = '/table_list?search_type=user_idx&search_keyword='+user_idx;
             window.location.replace($url);
             
         }
