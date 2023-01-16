@@ -77,13 +77,25 @@ class UserController extends Controller
                     if($search_arr[0] == "name"){
                         return $query->where('name',"like", "%".$search_arr[1]."%");
                     }else{
-                        $table_arr = (array) DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
-                        dd($table_arr);
-                        return $query->whereIn('table_idx' , $table_arr);
+                        //$table_arr = (array) DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1])->get();
+                       
+                        return $query->whereIn('table_idx' ,function($query)
+                        {
+                            $query->DB::table('table_users')->select('table_idx')->where('user_idx',$search_arr[1]);
+                        });
                     }
                         
                 })
                 ->limit($row)->orderby('table_idx','desc')->offset($offset)->get();
+
+                DB::table('users')
+                ->whereIn('id', function($query)
+                {
+                    $query->select(DB::raw(1))
+                        ->from('orders')
+                        ->whereRaw('orders.user_id = users.id');
+                })
+                ->get();
             
         $count = DB::table('redea_tables')->select('*')
                 ->when($search , function ($query, $search) {
